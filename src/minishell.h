@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/07 15:43:32 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/07 17:40:33 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <unistd.h>
 # include "../Libft/incl/libft.h"
 
-void rl_replace_line(const char *text, int clear_undo);
-
+char	*prompt(char **envp);
+void	handler(int sig, siginfo_t *info, void *context);
+void	rl_replace_line(const char *text, int clear_undo);
 #endif

@@ -28,7 +28,23 @@
 # include <unistd.h>
 # include "../Libft/incl/libft.h"
 
+typedef struct s_cmd
+{
+	char	*path;
+	t_cmd	*next;
+}
+
+typedef struct s_data
+{
+	t_cmd			*cmd;
+	char			*line;
+	char			*prompt;
+	t_env			*env;
+	struct termios	term;
+}					t_data;
+
 char	*prompt(char **envp);
 void	handler(int sig, siginfo_t *info, void *context);
 void	rl_replace_line(const char *text, int clear_undo);
+
 #endif

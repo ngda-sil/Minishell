@@ -14,7 +14,7 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	ft_bzero(&a, sizeof(t_data));
+	// todo here signals and termios
 	while (1)
 	{
 		reset_shell(&a, env);

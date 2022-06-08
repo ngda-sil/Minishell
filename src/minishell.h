@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/08 23:11:51 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/08 23:52:12 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <unistd.h>
 # include "../Libft/incl/libft.h"
 
-char	*prompt(char **envp);
+char	*prompt(void);
 void	handler(int sig);
 void	init_signals(void);
 void	rl_clear_history(void);

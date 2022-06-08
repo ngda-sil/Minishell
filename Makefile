@@ -17,8 +17,8 @@ CC			= gcc
 CFLAGS 		= -g3 -Wall -Wextra -Werror
 LFTDIR 		= ./Libft
 LIBFT		= $(LFTDIR)/libft.a
-RL_DIR	= -I $(HOME)/.brew/Cellar/readline/8.1.2/include
-RL_LIB   	= -lreadline -L $(HOME)/.brew/Cellar/readline/8.1.2/lib
+RL_DIR		= -I ~/.brew/Cellar/readline/8.1.2/include
+RL_LIB   	= -lreadline -L ~/.brew/Cellar/readline/8.1.2/lib
 SRC_PATH 	= ./src/
 SRC 		= $(addprefix $(SRC_PATH), $(FILES))
 OBJ			= $(SRC:.c=.o)
@@ -30,7 +30,7 @@ FILES 		= main.c \
 
 all : $(OBJ)
 	$(MAKE) -C $(LFTDIR)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(READ_DIR) $(READ_LIB) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(RL_DIR) $(RL_LIB) -o $(NAME)
 
 clean :
 	$(MAKE) -C $(LFTDIR) clean

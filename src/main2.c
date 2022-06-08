@@ -2,10 +2,11 @@
 #include "minishell.h"
 
 // Nouvelle version pour que ca marche avec le parsing
+
 // faut pas allouer de memoire avant readline (comme gnl)
 
 // je pense que c'est plus facile de reset le shell apres chaque commande
-// pour avoir le bon prompt
+// pour avoir le bon prompt, le env up to date, ...
 
 int	main(int argc, char **argv, char **env)
 {

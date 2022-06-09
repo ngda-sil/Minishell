@@ -44,12 +44,13 @@ t_env	*env_into_list(char **env)
 {
 	t_env	*lst;
 	int		i;
+	int		name_len;
 
 	i = 0;
 	while (env[i])
 	{
 		name_len = ft_strchr(env[i], '=') - env[i];
-		lstadd_back_env(&lst, lstnew_env(env[i]);
+		lstadd_back_env(&lst, lstnew_env(env[i]));
 		i++;
 	}
 }

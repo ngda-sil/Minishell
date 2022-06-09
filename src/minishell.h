@@ -28,7 +28,33 @@
 # include <unistd.h>
 # include "../Libft/incl/libft.h"
 
+typedef struct s_cmd	t_cmd;
+typedef struct s_env	t_env;
+
+typedef struct s_cmd
+{
+	char	*path;
+	t_cmd	*next;
+}			t_cmd;
+
+typedef struct s_env
+{
+	char	*name;
+	char	*value;
+	t_env	*next;
+}			t_env;
+
+typedef struct s_data
+{
+	t_cmd			*cmd;
+	char			*line;
+	char			*prompt;
+	t_env			*env;
+	struct termios	term;
+}					t_data;
+
 char	*prompt(void);
+t_env	*env_into_list(char **env);
 void	handler(int sig);
 void	init_signals(void);
 void	rl_clear_history(void);

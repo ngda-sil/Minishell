@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:32:52 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/08 23:13:18 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:13:28 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,18 @@ void	handler(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	if (sig == SIGSEGV) //pas du tout gere comme dans bash - solution temp
-	{
-		printf("exit");
-		exit(0);
-	}
 }
 
-void	set_flag_echoctl(void)
+void	set_flag_echoctl(t_data *a)
 {
-	struct termios	termios_p;
-
-	tcgetattr(STDIN_FILENO, &termios_p);
-	termios_p.c_lflag &= ~(ECHOCTL);
-	tcsetattr(STDIN_FILENO, 0, &termios_p);
+	tcgetattr(STDIN_FILENO, &a->term);
+	a->term.c_lflag &= ~(ECHOCTL);
+	tcsetattr(STDIN_FILENO, 0, &a->term);
 }
 
-void	init_signals(void)
+void	init_signals(t_data *a)
 {
-	set_flag_echoctl();
-	signal(SIGSEGV, handler);
+	set_flag_echoctl(a);
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 }

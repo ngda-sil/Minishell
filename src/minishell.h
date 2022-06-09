@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/08 23:52:12 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/09 18:23:30 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,13 @@ typedef struct s_data
 	struct termios	term;
 }					t_data;
 
-char	*prompt(void);
+char	*get_prompt(void);
 t_env	*env_into_list(char **env);
 void	handler(int sig);
-void	init_signals(void);
+void	init_signals(t_data *a);
+void	reset_shell(t_data *a, char **env);
 void	rl_clear_history(void);
 void	rl_replace_line(const char *text, int clear_undo);
+void	quit_shell(t_data *a);
 
 #endif

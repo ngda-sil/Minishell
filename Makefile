@@ -6,7 +6,7 @@
 #    By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 19:44:57 by ngda-sil          #+#    #+#              #
-#    Updated: 2022/06/07 17:58:28 by amuhleth         ###   ########.fr        #
+#    Updated: 2022/06/09 17:09:43 by ngda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,10 @@ RL_LIB   	= -lreadline -L ~/.brew/Cellar/readline/8.1.2/lib
 SRC_PATH 	= ./src/
 SRC 		= $(addprefix $(SRC_PATH), $(FILES))
 OBJ			= $(SRC:.c=.o)
-FILES 		= main.c \
+FILES 		= main2.c \
 			  signal.c \
 			  prompt.c \
+			  reset_shell.c\
 # ==============================================================================
 
 

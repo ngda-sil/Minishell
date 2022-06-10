@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:25 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/10 17:09:39 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:36:45 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	quit_shell(t_data *a) //vrmt temporaire pour tester
 {
 	free (a->prompt);
 	//while (1);
-	rl_clear_history();
+	//rl_clear_history();
 	exit(1);
 }
 

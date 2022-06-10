@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/10 18:36:11 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:48:50 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,14 @@ t_env		*lstlast_env(t_env *lst);
 void		lstadd_back_env(t_env **lst, t_env *new);
 t_env		*lstnew_env(char *line, int name_len);
 t_env		*env_into_list(char **env);
+void		print_env_list(t_env *lst);
 
 // utils to t_quotes linked list -> quotes_list.c
 
 t_quotes	*lstlast_quotes(t_quotes *lst);
 void		lstadd_back_quotes(t_quotes **lst, t_quotes *new);
 t_quotes	*lstnew_quotes(t_quotes *src);
+void		print_quotes_list(t_quotes *lst);
 
 void		parse_quotes(t_data *a);
 

@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/10 17:09:49 by amuhleth          #+#    #+#             */
+/*   Updated: 2022/06/10 17:50:06 by amuhleth         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -20,12 +31,16 @@ int	main(int argc, char **argv, char **env)
 	{
 		reset_shell(&a, env);
 		a.line = readline(a.prompt);
-		if ((a.line && (!ft_strncmp(a.line, "exit", 5))) || !a.line)
-			quit_shell(&a); //to do
-		if (a.line && ft_strncmp(a.line, "", 2)) // obliger de mettre ft_strncmp sinon les lignes vides sont dans l'historique
+		if ((a.line && !ft_strncmp(a.line, "exit", 5)) || !a.line)
+		{
+			//quit_shell(&a); //to do
+			break ;
+		}
+		if (a.line && a.line[0] != '\0')
 		{
 			add_history(a.line);
-			//parsing(&a, line);
+			parsing(&a);
+			//execution(&a);
 		}
 		free(a.prompt);
 		a.prompt = NULL;

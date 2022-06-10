@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:08:01 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/10 17:56:10 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:23:42 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_env	*env_into_list(char **env)
 	int		i;
 	int		name_len;
 
+	lst = NULL;
 	i = 0;
 	while (env[i])
 	{
@@ -63,4 +64,13 @@ t_env	*env_into_list(char **env)
 		i++;
 	}
 	return (lst);
+}
+
+void	print_env_list(t_env *lst)
+{
+	while (lst)
+	{
+		printf("Name:%s, value:%s\n", lst->name, lst->value);
+		lst = lst->next;
+	}
 }

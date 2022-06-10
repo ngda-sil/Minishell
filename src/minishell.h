@@ -30,12 +30,21 @@
 
 typedef struct s_cmd	t_cmd;
 typedef struct s_env	t_env;
+typedef struct s_quotes	t_quotes;
 
 typedef struct s_cmd
 {
 	char	*path;
 	t_cmd	*next;
 }			t_cmd;
+
+typedef struct s_quotes
+{
+	int			start;
+	int			stop;
+	char		c;
+	t_quotes	*next;
+}				t_quotes;
 
 typedef struct s_env
 {

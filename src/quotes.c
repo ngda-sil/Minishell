@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:13:17 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/10 17:57:42 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:27:50 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void	parse_quotes(t_data *a)
 	{
 		if (a->line[i] == '\'')
 			i = get_quotes_data(a, i, '\'');
-		if (a->line[i] == '\"')
+		else if (a->line[i] == '\"')
 			i = get_quotes_data(a, i, '\"');
+		else
+			i++;
 	}
 }

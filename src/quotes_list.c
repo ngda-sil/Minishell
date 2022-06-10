@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:29:04 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/10 17:58:25 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:49:54 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,13 @@ t_quotes	*lstnew_quotes(t_quotes *src)
 	new->type = src->type;
 	new->next = NULL;
 	return (new);
+}
+
+void	print_quotes_list(t_quotes *lst)
+{
+	while (lst)
+	{
+		printf("Start:%d, stop:%d, type:%c\n", lst->start, lst->stop, lst->type);
+		lst = lst->next;
+	}
 }

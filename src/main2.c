@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main2.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/10 17:09:49 by amuhleth          #+#    #+#             */
+/*   Updated: 2022/06/10 17:50:06 by amuhleth         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "minishell.h"
 
@@ -20,11 +31,15 @@ int	main(int argc, char **argv, char **env)
 		reset_shell(&a, env);
 		a.line = readline(a.prompt);
 		if (a.line && !ft_strncmp(a.line, "exit", 5))
-			quit_shell(&a); //to do
+		{
+			//quit_shell(&a); //to do
+			break ;
+		}
 		if (a.line)
 		{
 			add_history(a.line);
-			parsing(&a, line);
+			parsing(&a);
+			//execution(&a);
 		}
 		free(a.prompt);
 		a.prompt = NULL;

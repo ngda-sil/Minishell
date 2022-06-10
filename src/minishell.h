@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/10 17:56:59 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/10 18:36:11 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,10 @@ typedef struct s_data
 
 void		rl_replace_line(const char *text, int clear_undo);
 
-char		*prompt(char **envp);
+char		*get_prompt(void);
 
-void		handler(int sig, siginfo_t *info, void *context);
+void		handler(int sig);
+void		init_signals(t_data *a);
 
 void		reset_shell(t_data *a, char **env);
 

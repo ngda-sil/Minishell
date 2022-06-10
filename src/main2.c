@@ -25,17 +25,18 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	// todo here signals and termios
+
+	init_signals(&a);
 	while (1)
 	{
 		reset_shell(&a, env);
 		a.line = readline(a.prompt);
-		if (a.line && !ft_strncmp(a.line, "exit", 5))
+		if ((a.line && !ft_strncmp(a.line, "exit", 5)) || !a.line)
 		{
 			//quit_shell(&a); //to do
 			break ;
 		}
-		if (a.line)
+		if (a.line && a.line[0] != '\0')
 		{
 			add_history(a.line);
 			parsing(&a);
@@ -43,6 +44,8 @@ int	main(int argc, char **argv, char **env)
 		}
 		free(a.prompt);
 		a.prompt = NULL;
+		free(a.line); // faut free la ligne a chaque fois sinon ca leaks de ouf
+		a.line = NULL;
 	}
 	return (0);
 }

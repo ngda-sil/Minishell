@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_into_list.c                                    :+:      :+:    :+:   */
+/*   quotes_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/10 17:08:01 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/10 18:45:22 by amuhleth         ###   ########.fr       */
+/*   Created: 2022/06/10 17:29:04 by amuhleth          #+#    #+#             */
+/*   Updated: 2022/06/10 18:49:54 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_env	*lstlast_env(t_env *lst)
+t_quotes	*lstlast_quotes(t_quotes *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -21,9 +21,9 @@ t_env	*lstlast_env(t_env *lst)
 	return (lst);
 }
 
-void	lstadd_back_env(t_env **lst, t_env *new)
+void	lstadd_back_quotes(t_quotes **lst, t_quotes *new)
 {
-	t_env	*last;
+	t_quotes	*last;
 
 	if (!lst)
 		return ;
@@ -31,46 +31,30 @@ void	lstadd_back_env(t_env **lst, t_env *new)
 		*lst = new;
 	else
 	{
-		last = lstlast_env(*lst);
+		last = lstlast_quotes(*lst);
 		last->next = new;
 	}
 }
 
-t_env	*lstnew_env(char *line, int name_len)
+t_quotes	*lstnew_quotes(t_quotes *src)
 {
-	t_env	*new;
-
-	new = ft_calloc(sizeof(t_env), 1);
+	t_quotes	*new;
+	
+	new = ft_calloc(sizeof(t_quotes), 1);
 	if (!new)
 		return (NULL);
-	new->name = ft_substr(line, 0, name_len);
-	new->value = ft_strdup(line + name_len + 1);
+	new->start = src->start;
+	new->stop = src->stop;
+	new->type = src->type;
 	new->next = NULL;
 	return (new);
 }
 
-t_env	*env_into_list(char **env)
-{
-	t_env	*lst;
-	int		i;
-	int		name_len;
-
-	lst = NULL;
-	i = 0;
-	while (env[i])
-	{
-		name_len = ft_strchr(env[i], '=') - env[i];
-		lstadd_back_env(&lst, lstnew_env(env[i], name_len));
-		i++;
-	}
-	return (lst);
-}
-
-void	print_env_list(t_env *lst)
+void	print_quotes_list(t_quotes *lst)
 {
 	while (lst)
 	{
-		printf("Name:%s, value:%s\n", lst->name, lst->value);
+		printf("Start:%d, stop:%d, type:%c\n", lst->start, lst->stop, lst->type);
 		lst = lst->next;
 	}
 }

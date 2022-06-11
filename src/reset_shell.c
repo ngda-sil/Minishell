@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:25 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/10 18:36:45 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/11 15:58:42 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ void	reset_shell(t_data *a, char **env)
 	(void)env;
 	ft_bzero(a, sizeof(t_data));
 	a->env = env_into_list(env);
-	a->prompt = get_prompt();
+	a->prompt = get_prompt(a);
 }

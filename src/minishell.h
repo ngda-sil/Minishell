@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/10 18:48:50 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/11 15:58:11 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_data
 
 void		rl_replace_line(const char *text, int clear_undo);
 
-char		*get_prompt(void);
+char		*get_prompt(t_data *a);
 
 void		handler(int sig);
 void		init_signals(t_data *a);
@@ -80,6 +80,7 @@ t_env		*lstlast_env(t_env *lst);
 void		lstadd_back_env(t_env **lst, t_env *new);
 t_env		*lstnew_env(char *line, int name_len);
 t_env		*env_into_list(char **env);
+char		*find_value_env(t_env *lst, char *name);
 void		print_env_list(t_env *lst);
 
 // utils to t_quotes linked list -> quotes_list.c

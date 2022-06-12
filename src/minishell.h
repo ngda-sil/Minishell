@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/10 18:48:50 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/12 17:01:17 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_data
 {
 	t_cmd			*cmd;
 	char			*line;
+	int				len;
 	char			*prompt;
 	t_quotes		*quotes;
 	t_env			*env;
@@ -90,5 +91,6 @@ t_quotes	*lstnew_quotes(t_quotes *src);
 void		print_quotes_list(t_quotes *lst);
 
 void		parse_quotes(t_data *a);
+char		is_inside_quotes(t_data *a, int i);
 
 #endif

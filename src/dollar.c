@@ -1,20 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/10 17:07:05 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/12 17:54:09 by amuhleth         ###   ########.fr       */
+/*   Created: 2022/06/12 16:37:46 by amuhleth          #+#    #+#             */
+/*   Updated: 2022/06/12 18:03:28 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parsing(t_data *a)
+int	is_env_char(char c)
 {
-	a->len = ft_strlen(a->line);
-	parse_quotes(a);
-	//parse_dollar(a);
+	return (ft_isalpha || c == '_');
+}
+
+void	parse_dollar(t_data *a)
+{
+	int	i;
+
+	i = 0;
+	while (a->line[i])
+	{
+		if (a->line[i] == '$' && is_in_quotes != '\'')
+		{
+			i++;
+			if (a->line[i] == '?')
+				dollar_last_return(a);
+			else if (is_env_char(a->line[i]))
+				dollar_env(a);
+		}
+		i++;
+	}
 }

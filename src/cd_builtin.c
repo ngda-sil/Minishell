@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   cd_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/10 17:07:05 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/14 12:37:12 by ngda-sil         ###   ########.fr       */
+/*   Created: 2022/06/14 14:30:02 by ngda-sil          #+#    #+#             */
+/*   Updated: 2022/06/14 14:56:21 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parsing(t_data *a)
+void	cd_builtin(t_data *a)
 {
-	a->len = ft_strlen(a->line);
-	parse_quotes(a);
-	//parse_dollar(a);
-	print_quotes_list(a->quotes);
+	int i;
+	(void)a;
+	printf("%s\n", a->arg[1]);
+	i = chdir(a->arg[1]);	
+	printf("%d\n", i);
+
 }

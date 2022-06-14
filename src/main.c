@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:49 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/11 15:57:41 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/14 14:53:15 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@
 // je pense que c'est plus facile de reset le shell apres chaque commande
 // pour avoir le bon prompt, le env up to date, ...
 
+void	my_parse(t_data *a)
+{
+	a->arg = ft_split(a->line, ' ');
+}
+
 int	main(int argc, char **argv, char **env)
 {
-	t_data	a;
-
-	(void)argc;
 	(void)argv;
+	(void)argc;
+	t_data	a;
 
 	init_signals(&a);
 	while (1)
@@ -39,8 +43,9 @@ int	main(int argc, char **argv, char **env)
 		if (a.line && a.line[0] != '\0')
 		{
 			add_history(a.line);
-			parsing(&a);
-			//execution(&a);
+			my_parse(&a);
+			//parsing(&a);
+			execution(&a);
 		}
 		free(a.prompt);
 		a.prompt = NULL;

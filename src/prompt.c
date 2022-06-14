@@ -44,8 +44,10 @@ char	*ft_strjoin4(char const *s1, char const *s2, char const *s3,
 char	*get_prompt(t_data *a)
 {
 	(void)a;
+	char	*buf = NULL;
 	char	*user;
 
-	user = ft_strjoin4(getenv("USER"), "@", getenv("PWD"), ":~$ ");
+	user = ft_strjoin4(getenv("USER"), "@", ft_strrchr(getcwd(buf, LINE_MAX), '/') + 1, ":~$ ");
+	free (buf);
 	return (user);
 }

@@ -35,7 +35,7 @@ void	echo_builtin(t_data *a)
 
 	i = 1;
 	n = 0;
-	if (!is_only_n(a->arg[1]))
+	if (a->arg[1] && !is_only_n(a->arg[1]))
 	{
 		n++;
 		i++;

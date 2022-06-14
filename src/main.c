@@ -21,7 +21,7 @@
 
 void	my_parse(t_data *a)
 {
-	a->arg = ft_split(a->line, ' ');
+	a->arg = ft_split(a->line, ' ');		
 }
 
 int	main(int argc, char **argv, char **env)
@@ -35,11 +35,8 @@ int	main(int argc, char **argv, char **env)
 	{
 		reset_shell(&a, env);
 		a.line = readline(a.prompt);
-		if ((a.line && !ft_strncmp(a.line, "exit", 5)) || !a.line)
-		{
-			//quit_shell(&a); //to do
-			break ;
-		}
+		if (!a.line)
+			break;
 		if (a.line && a.line[0] != '\0')
 		{
 			add_history(a.line);
@@ -51,6 +48,7 @@ int	main(int argc, char **argv, char **env)
 		a.prompt = NULL;
 		free(a.line); // faut free la ligne a chaque fois sinon ca leaks de ouf
 		a.line = NULL;
-	}
+		ft_double_free(a.arg);
+	}	
 	return (0);
 }

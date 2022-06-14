@@ -13,11 +13,8 @@
 #include "minishell.h"
 
 void	cd_builtin(t_data *a)
-{
-	int i;
-	(void)a;
-	printf("%s\n", a->arg[1]);
-	i = chdir(a->arg[1]);	
-	printf("%d\n", i);
-
+{	
+	if (a->arg[1])
+		if (chdir(a->arg[1]))
+			printf("cd: no such file or directory: %s\n", a->arg[1]);
 }

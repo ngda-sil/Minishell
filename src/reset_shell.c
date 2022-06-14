@@ -21,9 +21,9 @@ void	quit_shell(t_data *a) //vrmt temporaire pour tester
 }
 
 void	reset_shell(t_data *a, char **env)
-{
+{	
 	ft_bzero(a, sizeof(t_data));
+	a->line = ft_calloc(sizeof(char), LINE_MAX);
 	a->env = env_into_list(env);
-	printf("coucoucocucouuc\n");
 	a->prompt = get_prompt(a);
 }

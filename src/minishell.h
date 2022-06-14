@@ -58,7 +58,7 @@ typedef struct s_data
 	char			**arg;
 	t_cmd			*cmd;
 	char			*line;
-	int				len;
+	int			len;
 	char			*prompt;
 	t_quotes		*quotes;
 	t_env			*env;
@@ -98,4 +98,5 @@ char		is_inside_quotes(t_data *a, int i);
 void		execution(t_data *a);
 void		echo_builtin(t_data *a);
 void		cd_builtin(t_data *a);
+void		exit_builtin(t_data *a);
 #endif

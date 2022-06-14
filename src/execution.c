@@ -20,6 +20,8 @@ void	is_builtin(t_data *a)
 		printf("%s\n", getenv("PWD")); // je devrais faire une fonction, mais je le ferai au moment de gerer le echo $?	
 	if (!ft_strcmp(a->arg[0], "cd"))
 		cd_builtin(a);
+	if (!ft_strcmp(a->arg[0], "exit"))
+		exit_builtin(a);
 }
 
 void	execution(t_data *a)

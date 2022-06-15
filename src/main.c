@@ -6,23 +6,11 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:49 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/14 14:53:15 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:42:13 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// Nouvelle version pour que ca marche avec le parsing
-
-// faut pas allouer de memoire avant readline (comme gnl)
-
-// je pense que c'est plus facile de reset le shell apres chaque commande
-// pour avoir le bon prompt, le env up to date, ...
-
-void	my_parse(t_data *a)
-{
-	a->arg = ft_split(a->line, ' ');		
-}
 
 int	main(int argc, char **argv, char **env)
 {
@@ -38,17 +26,15 @@ int	main(int argc, char **argv, char **env)
 		if (!a.line)
 			break;
 		if (a.line && a.line[0] != '\0')
-		{
+		{	
 			add_history(a.line);
-			my_parse(&a);
-			//parsing(&a);
+			parsing(&a);
 			execution(&a);
 		}
 		free(a.prompt);
 		a.prompt = NULL;
-		free(a.line); // faut free la ligne a chaque fois sinon ca leaks de ouf
+		free(a.line);
 		a.line = NULL;
-		ft_double_free(a.arg);
-	}	
+	}
 	return (0);
 }

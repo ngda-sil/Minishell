@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/14 14:56:14 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:37:54 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_data
 	char			**arg;
 	t_cmd			*cmd;
 	char			*line;
-	int			len;
+	int				len;
 	char			*prompt;
 	t_quotes		*quotes;
 	t_env			*env;
@@ -67,7 +67,7 @@ typedef struct s_data
 
 void		rl_replace_line(const char *text, int clear_undo);
 
-char		*get_prompt(t_data *a);
+char		*get_prompt(void);
 
 void		handler(int sig);
 void		init_signals(t_data *a);
@@ -75,6 +75,8 @@ void		init_signals(t_data *a);
 void		reset_shell(t_data *a, char **env);
 
 void		parsing(t_data *a);
+
+void		execution(t_data *a);
 
 // env_into_list.c
 
@@ -95,8 +97,9 @@ void		print_quotes_list(t_quotes *lst);
 void		parse_quotes(t_data *a);
 char		is_inside_quotes(t_data *a, int i);
 
-void		execution(t_data *a);
+// builtins
 void		echo_builtin(t_data *a);
 void		cd_builtin(t_data *a);
 void		exit_builtin(t_data *a);
+void		pwd_builtin(void);
 #endif

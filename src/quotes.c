@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:13:17 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/12 17:00:07 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/13 16:53:23 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,18 @@ int	get_quotes_data(t_data *a, int i, char type)
 
 	tmp.type = type;
 	tmp.start = i;
+	a->line[i] = '\0';
 	i++;
+	tmp.p = a->line + i;
 	while (a->line[i] != type && a->line[i])
 		i++;
 	if (!a->line[i])
 		exit(1);
 	if (a->line[i] == type)
+	{
 		tmp.stop = i;
+		a->line[i] = '\0';
+	}
 	lstadd_back_quotes(&a->quotes, lstnew_quotes(&tmp));
 	return (i + 1);
 }
@@ -48,7 +53,7 @@ void	parse_quotes(t_data *a)
 	int	i;
 
 	i = 0;
-	while (a->line[i])
+	while (i < a->len)
 	{
 		if (a->line[i] == '\'')
 			i = get_quotes_data(a, i, '\'');

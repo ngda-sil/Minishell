@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/15 16:37:54 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:57:29 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ typedef struct s_env
 
 typedef struct s_data
 {
-	char			**arg;
 	t_cmd			*cmd;
-	char			*line;
+	char			*line;	
+	char			**arg;
 	int				len;
 	char			*prompt;
 	t_quotes		*quotes;
@@ -66,7 +66,7 @@ typedef struct s_data
 }					t_data;
 
 void		rl_replace_line(const char *text, int clear_undo);
-
+void 		rl_clear_history (void);
 char		*get_prompt(void);
 
 void		handler(int sig);
@@ -102,4 +102,5 @@ void		echo_builtin(t_data *a);
 void		cd_builtin(t_data *a);
 void		exit_builtin(t_data *a);
 void		pwd_builtin(void);
+
 #endif

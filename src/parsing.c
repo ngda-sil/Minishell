@@ -25,7 +25,10 @@ t_list	*lstnew_dup(void *content)
 
 void	add_token(t_data *a, char *buffer)
 {
-	ft_lstadd_back(&a->cmd->tokens, lstnew_dup(buffer));
+	t_cmd	*p;
+
+	p = lstlast_cmd(a->cmd);
+	ft_lstadd_back(&p->tokens, lstnew_dup(buffer));
 }
 
 void	tokenization(t_data *a)
@@ -38,12 +41,15 @@ void	tokenization(t_data *a)
 	{
 		while (ft_isspace(a->line[i]) && !is_inside_quotes(a, i))
 			i++;
-		if (a->line[i] == '|')
+		if (a->line[i] == '|' && !is_inside_quotes(a, i))
 			parse_pipe(a);
-		else if (a->line[i] == '<' || a->line[i] == '>')
+		else if ((a->line[i] == '<' || a->line[i] == '>')
+			&& !is_inside_quotes(a, i))
 			add_token(a, join_clean(NULL, a->line[i]));
 		else if (a->line[i] == '\0' && is_dollar(a, i))
 			i = parse_dollar_token(a, i);
+		else if (a->line[i] == '\0' && is_empty_quotes(a, i))
+			add_token(a, ft_strdup(""));
 		else
 			parse_args(a, i);
 		i++;

@@ -16,7 +16,7 @@ void	parse_args(t_data *a, int i)
 {
 	if (a->line[i] != '\0')
 		a->buffer = join_clean(a->buffer, a->line[i]);
-	if (is_special_char(a, i + 1))
+	if (is_special_char(a, i + 1) && a->buffer)
 	{
 		add_token(a, a->buffer);
 		free(a->buffer);
@@ -26,7 +26,8 @@ void	parse_args(t_data *a, int i)
 
 void	parse_pipe(t_data *a)
 {
-	(void) a;
+	// deal with fd for redirection
+	lstadd_back_cmd(&a->cmd, lstnew_cmd());
 }
 
 t_quotes	*get_dollar(t_data *a, int i)

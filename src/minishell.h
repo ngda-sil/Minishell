@@ -124,6 +124,7 @@ int			parse_dollar_token(t_data *a, int i);
 // utils.c
 
 int			ft_isspace(int c);
+int			is_empty_quotes(t_data *a, int i);
 int			is_special_char(t_data *a, int i);
 char		*join_clean(char *s, char c);
 char		*join_2(char *s1, char *s2);

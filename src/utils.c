@@ -18,6 +18,20 @@ int	ft_isspace(int c)
 		|| c == '\r' || c == ' ');
 }
 
+int	is_empty_quotes(t_data *a, int i)
+{
+	t_quotes	*p;
+
+	p = a->quotes;
+	while (p)
+	{
+		if (i == p->start && i + 1 == p->stop)
+			return (1);
+		p = p->next;
+	}
+	return (0);
+}
+
 // c'est pas fini
 
 int	is_special_char(t_data *a, int i)
@@ -29,7 +43,7 @@ int	is_special_char(t_data *a, int i)
 		return (1);
 	else if (ft_isspace(c) && !is_inside_quotes(a, i))
 		return (1);
-	else if (c == '\0' && is_dollar(a, i)) // c'est lui qui est galere, faut rn
+	else if (c == '\0' && is_dollar(a, i))
 		return (0);
 	else if (a->len == i)
 		return (1);

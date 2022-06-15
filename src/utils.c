@@ -65,3 +65,29 @@ char	*join_clean(char *s, char c)
 	free(s);
 	return (res);
 }
+
+char	*join_2(char *s1, char *s2)
+{
+	int		len;
+	char	*res;
+	int		i;
+	int		j;
+
+	if (s1 == NULL)
+		return (ft_strdup(s2));
+	len = ft_strlen(s1) + ft_strlen(s2);
+	res = (char *)malloc(sizeof(char) * (len + 1));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (i < s1[i])
+	{
+		res[i] = s1[i];
+		i++;
+	}
+	j = -1;
+	while (s2[++j])
+		res[i + j] = s2[j];
+	res[i + j] = '\0';
+	return (res);
+}

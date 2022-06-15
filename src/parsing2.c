@@ -29,8 +29,32 @@ void	parse_pipe(t_data *a)
 	(void) a;
 }
 
+t_quotes	*get_dollar(t_data *a, int i)
+{
+	t_quotes	*p;
+
+	p = a->quotes;
+	while (p)
+	{
+		if (p->type == '$' && i == p->start)
+			return (p);
+		p = p->next;
+	}
+	return (NULL);
+}
+
 int	parse_dollar_token(t_data *a, int i)
 {
-	(void) a;
-	return (i);
+	t_quotes	*p;
+
+	p = get_dollar(a, i);
+	if (p->p)
+		a->buffer = join_2(a->buffer, p->p);
+	if (is_special_char(a, p->stop + 1) && a->buffer)
+	{
+		add_token(a, a->buffer);
+		free(a->buffer);
+		a->buffer = NULL;
+	}
+	return (p->stop);
 }

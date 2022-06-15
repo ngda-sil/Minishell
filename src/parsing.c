@@ -12,12 +12,20 @@
 
 #include "minishell.h"
 
+t_list	*lstnew_dup(void *content)
+{
+	t_list	*new;
+
+	new = (t_list *)ft_calloc(sizeof(t_list), 1);
+	if (!new)
+		return (NULL);
+	new->content = ft_strdup(content);
+	return (new);
+}
+
 void	add_token(t_data *a, char *buffer)
 {
-	t_cmd	*p;
-
-	p = lstlast_cmd(a->cmd);
-	ft_lstadd_back(&a->cmd->tokens, ft_lstnew(buffer));
+	ft_lstadd_back(&a->cmd->tokens, lstnew_dup(buffer));
 }
 
 void	tokenization(t_data *a)
@@ -49,5 +57,5 @@ void	parsing(t_data *a)
 	parse_dollar(a);
 	tokenization(a);
 	print_cmd_tokens(a->cmd);
-	//print_quotes_list(a->quotes);
+	print_quotes_list(a->quotes);
 }

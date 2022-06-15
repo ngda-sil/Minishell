@@ -52,10 +52,11 @@ void	print_cmd_tokens(t_cmd *cmd)
 
 	while (cmd)
 	{
+		printf("cmd:\n");
 		lst = cmd->tokens;
 		while (lst)
 		{
-			printf("\"%s\"\n", lst->content);
+			printf("\"%s\"\n", (char *)lst->content);
 			lst = lst->next;
 		}
 		cmd = cmd->next;

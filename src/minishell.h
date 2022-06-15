@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/15 15:34:32 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:58:44 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct s_data
 	t_quotes		*quotes;
 	t_env			*env;
 	struct termios	term;
+	char			*buffer;
 }					t_data;
 
 void		rl_replace_line(const char *text, int clear_undo);
@@ -106,6 +107,7 @@ int			is_dollar(t_data *a, int i);
 t_cmd		*lstlast_cmd(t_cmd *lst);
 void		lstadd_back_cmd(t_cmd **lst, t_cmd *new);
 t_cmd		*lstnew_cmd(void);
+void		print_cmd_tokens(t_cmd *cmd);
 
 // parsing.c
 
@@ -115,8 +117,7 @@ void	tokenization(t_data *a);
 
 // parsing2.c
 
-void		parse_redirection(t_data *a);
-void		parse_args(t_data *a, char *buffer, int i);
+void		parse_args(t_data *a, int i);
 void		parse_pipe(t_data *a);
 int			parse_dollar_token(t_data *a, int i);
 

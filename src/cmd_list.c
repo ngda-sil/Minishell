@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 14:49:51 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/15 14:56:39 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:27:28 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,20 @@ t_cmd	*lstnew_cmd(void)
 	if (!new)
 		return (NULL);
 	return (new);
+}
+
+void	print_cmd_tokens(t_cmd *cmd)
+{
+	t_list	*lst;
+
+	while (cmd)
+	{
+		lst = cmd->tokens;
+		while (lst)
+		{
+			printf("\"%s\"\n", lst->content);
+			lst = lst->next;
+		}
+		cmd = cmd->next;
+	}
 }

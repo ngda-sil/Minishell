@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:07:05 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/15 15:32:45 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:58:59 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ void	add_token(t_data *a, char *buffer)
 void	tokenization(t_data *a)
 {
 	int		i;
-	char	*buffer;
 
-	buffer = NULL;
 	lstadd_back_cmd(&a->cmd, lstnew_cmd());
 	i = 0;
 	while (i < a->len)
@@ -35,11 +33,11 @@ void	tokenization(t_data *a)
 		if (a->line[i] == '|')
 			parse_pipe(a);
 		else if (a->line[i] == '<' || a->line[i] == '>')
-			parse_redirection(a);
+			add_token(a, join_clean(NULL, a->line[i]));
 		else if (a->line[i] == '\0' && is_dollar(a, i))
 			i = parse_dollar_token(a, i);
 		else
-			parse_args(a, buffer, i);
+			parse_args(a, i);
 		i++;
 	}
 }
@@ -50,5 +48,6 @@ void	parsing(t_data *a)
 	parse_quotes(a);
 	parse_dollar(a);
 	tokenization(a);
+	print_cmd_tokens(a->cmd);
 	//print_quotes_list(a->quotes);
 }

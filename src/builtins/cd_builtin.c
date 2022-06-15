@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   cd_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/10 17:07:05 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/14 12:37:12 by ngda-sil         ###   ########.fr       */
+/*   Created: 2022/06/14 14:30:02 by ngda-sil          #+#    #+#             */
+/*   Updated: 2022/06/15 16:55:22 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void	parsing(t_data *a)
-{
-	a->len = ft_strlen(a->line);
-	parse_quotes(a);
-	//parse_dollar(a);
-	print_quotes_list(a->quotes);
+void	cd_builtin(t_data *a)
+{	
+	if (a->arg[1])
+		if (chdir(a->arg[1]))
+			printf("cd: no such file or directory: %s\n", a->arg[1]);
 }

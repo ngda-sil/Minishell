@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/12 17:01:17 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/15 16:57:29 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ typedef struct s_env
 typedef struct s_data
 {
 	t_cmd			*cmd;
-	char			*line;
+	char			*line;	
+	char			**arg;
 	int				len;
 	char			*prompt;
 	t_quotes		*quotes;
@@ -65,8 +66,8 @@ typedef struct s_data
 }					t_data;
 
 void		rl_replace_line(const char *text, int clear_undo);
-
-char		*get_prompt(t_data *a);
+void 		rl_clear_history (void);
+char		*get_prompt(void);
 
 void		handler(int sig);
 void		init_signals(t_data *a);
@@ -74,6 +75,8 @@ void		init_signals(t_data *a);
 void		reset_shell(t_data *a, char **env);
 
 void		parsing(t_data *a);
+
+void		execution(t_data *a);
 
 // env_into_list.c
 
@@ -93,5 +96,11 @@ void		print_quotes_list(t_quotes *lst);
 
 void		parse_quotes(t_data *a);
 char		is_inside_quotes(t_data *a, int i);
+
+// builtins
+void		echo_builtin(t_data *a);
+void		cd_builtin(t_data *a);
+void		exit_builtin(t_data *a);
+void		pwd_builtin(void);
 
 #endif

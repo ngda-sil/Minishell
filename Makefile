@@ -6,7 +6,7 @@
 #    By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 19:44:57 by ngda-sil          #+#    #+#              #
-#    Updated: 2022/06/10 17:48:17 by amuhleth         ###   ########.fr        #
+#    Updated: 2022/06/15 16:36:52 by ngda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +18,11 @@ CFLAGS 		= -g3 -Wall -Wextra -Werror
 LFTDIR 		= ./Libft
 LIBFT		= $(LFTDIR)/libft.a
 RL_DIR		= -I ~/.brew/Cellar/readline/8.1.2/include
-RL_LIB   	= -lreadline -L ~/.brew/Cellar/readline/8.1.2/lib
+RL_LIB   	= -lreadline -L ~/.brew/Cellar/readline/8.1.2/lib 
 SRC_PATH 	= ./src/
 SRC 		= $(addprefix $(SRC_PATH), $(FILES))
 OBJ			= $(SRC:.c=.o)
-FILES 		= main2.c 			\
+FILES 		= main.c 			\
 			  signal.c 			\
 			  prompt.c 			\
 			  env_into_list.c	\
@@ -30,7 +30,11 @@ FILES 		= main2.c 			\
 			  quotes.c			\
 			  quotes_list.c		\
 			  reset_shell.c		\
-
+			  execution.c		\
+			  builtins/echo_builtin.c	\
+			  builtins/cd_builtin.c		\
+			  builtins/exit_builtin.c	\
+			  builtins/pwd_builtin.c	\
 # ==============================================================================
 
 

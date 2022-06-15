@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   pwd_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/10 17:07:05 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/14 12:37:12 by ngda-sil         ###   ########.fr       */
+/*   Created: 2022/06/15 16:33:58 by ngda-sil          #+#    #+#             */
+/*   Updated: 2022/06/15 16:34:49 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void	parsing(t_data *a)
+void	pwd_builtin(void)
 {
-	a->len = ft_strlen(a->line);
-	parse_quotes(a);
-	//parse_dollar(a);
-	print_quotes_list(a->quotes);
+	printf("%s\n", getenv("PWD"));
 }

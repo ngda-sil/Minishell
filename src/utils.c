@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 14:11:30 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/15 14:43:22 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/15 15:35:35 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_isspace(int c)
 	return (c == '\t' || c == '\v' || c == '\f'
 		|| c == '\r' || c == ' ');
 }
+
+// c'est pas fini
 
 int	is_special_char(t_data *a, int i)
 {

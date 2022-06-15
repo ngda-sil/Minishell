@@ -6,7 +6,7 @@
 #    By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 19:44:57 by ngda-sil          #+#    #+#              #
-#    Updated: 2022/06/13 16:56:14 by amuhleth         ###   ########.fr        #
+#    Updated: 2022/06/15 15:19:51 by amuhleth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,12 @@ FILES 		= main2.c 			\
 			  prompt.c 			\
 			  env_into_list.c	\
 			  parsing.c			\
+			  parsing2.c		\
 			  quotes.c			\
 			  quotes_list.c		\
 			  reset_shell.c		\
 			  dollar.c			\
+			  cmd_list.c		\
 
 # ==============================================================================
 

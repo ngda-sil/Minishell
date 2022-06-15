@@ -6,11 +6,25 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:37:46 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/13 17:16:37 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/15 15:31:17 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_dollar(t_data *a, int i)
+{
+	t_quotes	*p;
+
+	p = a->quotes;
+	while (p)
+	{
+		if (p->type == '$' && i == p->start)
+			return (1);
+		p = p->next;
+	}
+	return (0);
+}
 
 int	is_env_char(char c)
 {

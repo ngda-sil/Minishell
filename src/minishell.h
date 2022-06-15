@@ -59,7 +59,8 @@ typedef struct s_env
 typedef struct s_data
 {
 	t_cmd			*cmd;
-	char			*line;
+	char			*line;	
+	char			**arg;
 	int				len;
 	char			*prompt;
 	t_quotes		*quotes;
@@ -69,7 +70,7 @@ typedef struct s_data
 }					t_data;
 
 void		rl_replace_line(const char *text, int clear_undo);
-
+void 		rl_clear_history (void);
 char		*get_prompt(void);
 
 void		handler(int sig);
@@ -79,12 +80,15 @@ void		reset_shell(t_data *a, char **env);
 
 void		parsing(t_data *a);
 
+void		execution(t_data *a);
+
 // env_into_list.c
 
 t_env		*lstlast_env(t_env *lst);
 void		lstadd_back_env(t_env **lst, t_env *new);
 t_env		*lstnew_env(char *line, int name_len);
 t_env		*env_into_list(char **env);
+char		*find_value_env(t_env *lst, char *name);
 void		print_env_list(t_env *lst);
 
 // utils to t_quotes linked list -> quotes_list.c
@@ -128,5 +132,12 @@ int			is_empty_quotes(t_data *a, int i);
 int			is_special_char(t_data *a, int i);
 char		*join_clean(char *s, char c);
 char		*join_2(char *s1, char *s2);
+
+// builtins
+void		echo_builtin(t_data *a);
+void		cd_builtin(t_data *a);
+void		exit_builtin(t_data *a);
+void		pwd_builtin(void);
+
 
 #endif

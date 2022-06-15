@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reset_shell.c                                      :+:      :+:    :+:   */
+/*   pwd_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/10 17:09:25 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/15 16:52:20 by ngda-sil         ###   ########.fr       */
+/*   Created: 2022/06/15 16:33:58 by ngda-sil          #+#    #+#             */
+/*   Updated: 2022/06/15 16:34:49 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void	reset_shell(t_data *a, char **env)
-{	
-	ft_bzero(a, sizeof(t_data));
-	a->env = env_into_list(env);
-	a->prompt = get_prompt();
+void	pwd_builtin(void)
+{
+	printf("%s\n", getenv("PWD"));
 }

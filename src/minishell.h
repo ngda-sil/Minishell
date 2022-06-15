@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/13 16:54:56 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/15 14:13:39 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_quotes	t_quotes;
 
 typedef struct s_cmd
 {
+	t_list	*tokens;
+	char	**args;
 	char	*path;
 	t_cmd	*next;
 }			t_cmd;
@@ -97,5 +99,9 @@ char		is_inside_quotes(t_data *a, int i);
 // parse dollar to env    -> dollar.c
 
 void		parse_dollar(t_data *a);
+
+// utils.c
+
+int			ft_isspace(int c);
 
 #endif

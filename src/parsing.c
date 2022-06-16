@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:07:05 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/16 15:57:18 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/16 18:10:14 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	tokenization(t_data *a)
 			parse_pipe(a);
 		else if ((a->line[i] == '<' || a->line[i] == '>')
 			&& !is_inside_quotes(a, i))
-			add_token(a, join_clean(NULL, a->line[i]));
+			i = parse_redirection_token(a, i);
 		else if (a->line[i] == '\0' && is_dollar(a, i))
 			i = parse_dollar_token(a, i);
 		else if (a->line[i] == '\0' && is_empty_quotes(a, i))

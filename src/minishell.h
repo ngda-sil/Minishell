@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/16 15:56:54 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/16 18:11:16 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ void	tokenization(t_data *a);
 void		parse_args(t_data *a, int i);
 void		parse_pipe(t_data *a);
 int			parse_dollar_token(t_data *a, int i);
+int			parse_redirection_token(t_data *a, int i);
 
 // parsing3.c
 

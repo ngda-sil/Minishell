@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes_list.c                                      :+:      :+:    :+:   */
+/*   cmd_list.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/10 17:29:04 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/13 16:29:16 by amuhleth         ###   ########.fr       */
+/*   Created: 2022/06/15 14:49:51 by amuhleth          #+#    #+#             */
+/*   Updated: 2022/06/15 16:27:28 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_quotes	*lstlast_quotes(t_quotes *lst)
+t_cmd	*lstlast_cmd(t_cmd *lst)
 {
 	if (!lst)
 		return (NULL);
@@ -21,9 +21,9 @@ t_quotes	*lstlast_quotes(t_quotes *lst)
 	return (lst);
 }
 
-void	lstadd_back_quotes(t_quotes **lst, t_quotes *new)
+void	lstadd_back_cmd(t_cmd **lst, t_cmd *new)
 {
-	t_quotes	*last;
+	t_cmd	*last;
 
 	if (!lst)
 		return ;
@@ -31,32 +31,34 @@ void	lstadd_back_quotes(t_quotes **lst, t_quotes *new)
 		*lst = new;
 	else
 	{
-		last = lstlast_quotes(*lst);
+		last = lstlast_cmd(*lst);
 		last->next = new;
 	}
 }
 
-t_quotes	*lstnew_quotes(t_quotes *src)
+t_cmd	*lstnew_cmd(void)
 {
-	t_quotes	*new;
-	
-	new = ft_calloc(sizeof(t_quotes), 1);
+	t_cmd	*new;
+
+	new = ft_calloc(sizeof(t_cmd), 1);
 	if (!new)
 		return (NULL);
-	new->start = src->start;
-	new->stop = src->stop;
-	new->type = src->type;
-	new->p = src->p;
-	new->next = NULL;
 	return (new);
 }
 
-void	print_quotes_list(t_quotes *lst)
+void	print_cmd_tokens(t_cmd *cmd)
 {
-	while (lst)
+	t_list	*lst;
+
+	while (cmd)
 	{
-		printf("Start:%d, stop:%d, type:%c, str:%s\n", lst->start,
-				lst->stop, lst->type, lst->p);
-		lst = lst->next;
+		printf("cmd:\n");
+		lst = cmd->tokens;
+		while (lst)
+		{
+			printf("\"%s\"\n", (char *)lst->content);
+			lst = lst->next;
+		}
+		cmd = cmd->next;
 	}
 }

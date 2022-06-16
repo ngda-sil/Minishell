@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:07:05 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/15 16:58:59 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/16 15:57:18 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	parsing(t_data *a)
 	parse_quotes(a);
 	parse_dollar(a);
 	tokenization(a);
+	parse_redirections(a, a->cmd);
 	print_cmd_tokens(a->cmd);
 	print_quotes_list(a->quotes);
 }

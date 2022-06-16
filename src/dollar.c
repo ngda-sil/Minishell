@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:37:46 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/15 15:31:17 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/16 16:22:59 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	is_dollar(t_data *a, int i)
 
 int	is_env_char(char c)
 {
-	return (ft_isalpha(c) || c == '_');
+	return (ft_isalnum(c) || c == '_');
 }
 
 void	dollar_env(t_data *a, int i)

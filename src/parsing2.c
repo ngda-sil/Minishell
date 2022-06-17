@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 14:25:12 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/16 18:18:18 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:53:08 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ t_quotes	*get_dollar(t_data *a, int i)
 	p = a->quotes;
 	while (p)
 	{
-		if (p->type == '$' && i == p->start)
+		if ((p->type == '$' || p->type == '?') && i == p->start)
 			return (p);
 		p = p->next;
 	}

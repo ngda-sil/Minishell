@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:49 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/17 19:07:30 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:57:05 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	main(int ac, char **av, char **env)
 					continue ;
 				//execution(&a);
 			}
-			free_all(&a);
 		}
 		rl_clear_history();
+		free_all(&a);
 	}
 	return (0);
 }

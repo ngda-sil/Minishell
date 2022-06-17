@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:37:46 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/17 18:53:37 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:45:41 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_dollar(t_data *a, int i)
 	p = a->quotes;
 	while (p)
 	{
-		if (p->type == '$' && i == p->start)
+		if ((p->type == '$' || p->type == '?') && i == p->start)
 			return (1);
 		p = p->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 18:24:59 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/17 18:54:57 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:18:45 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,24 @@ void	lstclear_cmd(t_cmd **lst)
 void	free_all(t_data *a)
 {
 	if (a->cmd)
-		free_cmd(a);
+		lstclear_cmd(&a->cmd);
 	if (a->quotes)
-		free_quotes(a);
+		lstclear_quotes(&a->quotes);
 	if (a->env)
-		free_env(a);
+		lstclear_env(&a->env);
 	if (a->line)
 	{
-		free(a->line)
+		free(a->line);
 		a->line = NULL;
 	}
 	if (a->prompt)
 	{
-		free(a->prompt)
+		free(a->prompt);
 		a->prompt = NULL;
 	}
 	if (a->buffer)
 	{
-		free(a->buffer)
+		free(a->buffer);
 		a->buffer = NULL;
 	}
 }

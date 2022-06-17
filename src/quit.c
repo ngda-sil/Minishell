@@ -1,42 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/10 17:09:49 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/17 20:46:54 by amuhleth         ###   ########.fr       */
+/*   Created: 2022/06/17 17:21:16 by amuhleth          #+#    #+#             */
+/*   Updated: 2022/06/17 17:44:07 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int ac, char **av, char **env)
+void	red_flag(char *message)
 {
-	t_data	a;
+	ft_putstr_fd("\033[0;31m", 2);
+	ft_putstr_fd(message, 2);
+	ft_putendl_fd("\033[0m", 2);
+}
 
-	(void)av;
-	ft_bzero(&a, sizeof(t_data));
-	if (ac == 1)
-	{
-		init_signals(&a);
-		while (1)
-		{
-			reset_shell(&a, env);
-			a.line = readline(a.prompt);
-			if (!a.line)
-				break ;
-			if (a.line && a.line[0] != '\0')
-			{	
-				add_history(a.line);
-				if (parsing(&a))
-					continue ;
-				//execution(&a);
-			}
-		}
-		rl_clear_history();
-		free_all(&a);
-	}
-	return (0);
+void	panic(char *message)
+{
+	red_flag(message);
+	exit(EXIT_FAILURE);
 }

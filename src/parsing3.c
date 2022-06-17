@@ -6,42 +6,76 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:46:17 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/16 15:56:32 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 18:15:41 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parse_input(t_data *a, t_list *lst)
+void	parse_empty_quotes(t_data *a, int i)
 {
-	(void)a;
-	if (!lst->next)
-		exit(1);
+	if (a->buffer == NULL && is_special_char(a, i + 1))
+		add_token(a, ft_strdup(""));
 }
 
-void	parse_output(t_data *a, t_list *lst)
+int	parse_infile(t_data *a, t_list *lst)
 {
 	(void)a;
-	if (!lst->next)
-		exit(1);
+	if (!lst->next->next)
+	{
+		red_flag("minishell: syntax error near unexpected token 'newline'");
+		a->last_ret = 258;
+		return (1);
+	}
+	return (0);
 }
 
-void	parse_redirections(t_data *a, t_cmd *cmd)
+int	parse_outfile_trunc(t_data *a, t_list *lst)
+{
+	(void)a;
+	if (!lst->next->next)
+	{
+		red_flag("minishell: syntax error near unexpected token 'newline'");
+		a->last_ret = 258;
+		return (1);
+	}
+	return (0);
+}
+
+int	parse_outfile_append(t_data *a, t_list *lst)
+{
+	(void)a;
+	if (!lst->next->next)
+	{
+		red_flag("minishell: syntax error near unexpected token 'newline'");
+		a->last_ret = 258;
+		return (1);
+	}
+	return (0);
+}
+
+int	parse_redirections(t_data *a, t_cmd *cmd)
 {
 	t_list	*lst;
+	int		check;
 
+	check = 0;
 	while (cmd)
 	{
 		lst = cmd->tokens;
-		while (lst)
+		while (lst && lst->next)
 		{
-			if (!ft_strncmp(lst->content, ">", 2))
-				parse_output(a, lst);
-			else if (!ft_strncmp(lst->content, "<", 2))
-				parse_input(a, lst);
+			if (!ft_strncmp(lst->next->content, ">", 2))
+				check = parse_outfile_trunc(a, lst);
+			else if (!ft_strncmp(lst->next->content, ">>", 3))
+				check = parse_outfile_append(a, lst);
+			else if (!ft_strncmp(lst->next->content, "<", 2))
+				check = parse_infile(a, lst);
+			if (check == 1)
+				return (1);
 			lst = lst->next;
 		}
-
 		cmd = cmd->next;
 	}
+	return (0);
 }

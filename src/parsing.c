@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:07:05 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/16 18:10:14 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 20:38:43 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,49 @@ void	tokenization(t_data *a)
 		else if (a->line[i] == '\0' && is_dollar(a, i))
 			i = parse_dollar_token(a, i);
 		else if (a->line[i] == '\0' && is_empty_quotes(a, i))
-			add_token(a, ft_strdup(""));
+			parse_empty_quotes(a, i);
 		else
 			parse_args(a, i);
 		i++;
 	}
 }
 
-void	parsing(t_data *a)
+void	tokens_to_args(t_cmd *cmd)
+{
+	t_list	*lst;
+	int		nb_tokens;
+	int		i;
+
+	while (cmd)
+	{
+		nb_tokens = ft_lstsize(cmd->tokens);
+		cmd->args = ft_calloc(nb_tokens + 1, sizeof(char *));
+		if (!cmd->args)
+			panic("minishell: malloc failed");
+		lst = cmd->tokens;
+		i = 0;
+		while (lst)
+		{
+			cmd->args[i] = lst->content;
+			i++;
+			lst = lst->next;
+		}
+		cmd = cmd->next;
+	}
+}
+
+int	parsing(t_data *a)
 {
 	a->len = ft_strlen(a->line);
-	parse_quotes(a);
+	if (parse_quotes(a))
+		return (1);
 	parse_dollar(a);
 	tokenization(a);
-	parse_redirections(a, a->cmd);
-	print_cmd_tokens(a->cmd);
-	print_quotes_list(a->quotes);
+	if (parse_redirections(a, a->cmd))
+		return (1);
+	tokens_to_args(a->cmd);
+	//print_cmd_tokens(a->cmd);
+	print_cmd_args(a->cmd);
+	//print_quotes_list(a->quotes);
+	return (0);
 }

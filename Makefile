@@ -6,7 +6,7 @@
 #    By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 19:44:57 by ngda-sil          #+#    #+#              #
-#    Updated: 2022/06/16 15:56:15 by amuhleth         ###   ########.fr        #
+#    Updated: 2022/06/17 19:16:50 by amuhleth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,24 +29,22 @@ RL_LIB   	= -lreadline -L ~/.brew/Cellar/readline/8.1.2/lib
 SRC_PATH 	= ./src/
 SRC 		= $(addprefix $(SRC_PATH), $(FILES))
 OBJ			= $(SRC:.c=.o)
-FILES 		= main.c 			\
-			  signal.c 			\
-			  prompt.c 			\
-			  env_into_list.c	\
-			  parsing.c			\
-			  parsing2.c		\
-			  parsing3.c		\
-			  quotes.c			\
-			  quotes_list.c		\
-			  reset_shell.c		\
-			  dollar.c			\
-			  cmd_list.c		\
-			  utils.c			\
-			  execution.c		\
-			  builtins/echo_builtin.c	\
-			  builtins/cd_builtin.c		\
-			  builtins/exit_builtin.c	\
-			  builtins/pwd_builtin.c	\
+FILES 		= main.c 					\
+			  signal.c 					\
+			  prompt.c 					\
+			  env_into_list.c			\
+			  parsing.c					\
+			  parsing2.c				\
+			  parsing3.c				\
+			  quotes.c					\
+			  quotes_list.c				\
+			  reset_shell.c				\
+			  dollar.c					\
+			  cmd_list.c				\
+			  utils.c					\
+			  quit.c					\
+			  free.c					\
+			  free2.c					\
         
 # ==============================================================================
 

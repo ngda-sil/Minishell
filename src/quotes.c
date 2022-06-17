@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:13:17 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/13 16:53:23 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 18:14:24 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ int	get_quotes_data(t_data *a, int i, char type)
 	while (a->line[i] != type && a->line[i])
 		i++;
 	if (!a->line[i])
-		exit(1);
+	{
+		red_flag("minishell: syntax error near unexpected token 'quote'");
+		a->last_ret = 258;
+		return (-1);
+	}
 	if (a->line[i] == type)
 	{
 		tmp.stop = i;
@@ -48,7 +52,7 @@ char	is_inside_quotes(t_data *a, int i)
 	return (0);
 }
 
-void	parse_quotes(t_data *a)
+int	parse_quotes(t_data *a)
 {
 	int	i;
 
@@ -61,5 +65,8 @@ void	parse_quotes(t_data *a)
 			i = get_quotes_data(a, i, '\"');
 		else
 			i++;
+		if (i == -1)
+			return (1);
 	}
+	return (0);
 }

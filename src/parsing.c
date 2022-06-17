@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:07:05 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/17 17:29:29 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 20:38:43 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,30 @@ void	tokenization(t_data *a)
 	}
 }
 
+void	tokens_to_args(t_cmd *cmd)
+{
+	t_list	*lst;
+	int		nb_tokens;
+	int		i;
+
+	while (cmd)
+	{
+		nb_tokens = ft_lstsize(cmd->tokens);
+		cmd->args = ft_calloc(nb_tokens + 1, sizeof(char *));
+		if (!cmd->args)
+			panic("minishell: malloc failed");
+		lst = cmd->tokens;
+		i = 0;
+		while (lst)
+		{
+			cmd->args[i] = lst->content;
+			i++;
+			lst = lst->next;
+		}
+		cmd = cmd->next;
+	}
+}
+
 int	parsing(t_data *a)
 {
 	a->len = ft_strlen(a->line);
@@ -65,7 +89,9 @@ int	parsing(t_data *a)
 	tokenization(a);
 	if (parse_redirections(a, a->cmd))
 		return (1);
-	print_cmd_tokens(a->cmd);
-	print_quotes_list(a->quotes);
+	tokens_to_args(a->cmd);
+	//print_cmd_tokens(a->cmd);
+	print_cmd_args(a->cmd);
+	//print_quotes_list(a->quotes);
 	return (0);
 }

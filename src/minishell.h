@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/17 19:11:33 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 20:22:23 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ t_cmd		*lstlast_cmd(t_cmd *lst);
 void		lstadd_back_cmd(t_cmd **lst, t_cmd *new);
 t_cmd		*lstnew_cmd(void);
 void		print_cmd_tokens(t_cmd *cmd);
+void		print_cmd_args(t_cmd *cmd);
 
 // parsing.c
 

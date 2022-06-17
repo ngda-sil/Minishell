@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 18:24:59 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/17 19:18:45 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 20:23:22 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	lstdelone_cmd(t_cmd *lst)
 	if (lst->tokens)
 		ft_lstclear(&lst->tokens, &free);
 	if (lst->args)
-		ft_double_free(lst->args);
+		free(lst->args);
 	if (lst->path)
 		free(lst->path);
 	free(lst);

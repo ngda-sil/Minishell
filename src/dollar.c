@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:37:46 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/16 16:22:59 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 17:23:40 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	dollar_env(t_data *a, int i)
 	new.stop = i - 1;
 	tmp = ft_substr(a->line + new.start + 1, 0, new.stop - new.start);
 	if (!tmp)
-		exit(1);
+		panic("minishell: malloc failed");
 	new.p = getenv(tmp);
 	free(tmp);
 	lstadd_back_quotes(&a->quotes, lstnew_quotes(&new));

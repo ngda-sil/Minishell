@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:49 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/16 17:04:15 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 17:08:30 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	main(int ac, char **av, char **env)
 			if (a.line && a.line[0] != '\0')
 			{	
 				add_history(a.line);
-				parsing(&a);
+				if (parsing(&a))
+					continue ;
 				//execution(&a);
 			}
 			free(a.prompt); // fonction free_all ? 

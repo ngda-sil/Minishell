@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:07:05 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/16 18:10:14 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 17:29:29 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,23 @@ void	tokenization(t_data *a)
 		else if (a->line[i] == '\0' && is_dollar(a, i))
 			i = parse_dollar_token(a, i);
 		else if (a->line[i] == '\0' && is_empty_quotes(a, i))
-			add_token(a, ft_strdup(""));
+			parse_empty_quotes(a, i);
 		else
 			parse_args(a, i);
 		i++;
 	}
 }
 
-void	parsing(t_data *a)
+int	parsing(t_data *a)
 {
 	a->len = ft_strlen(a->line);
-	parse_quotes(a);
+	if (parse_quotes(a))
+		return (1);
 	parse_dollar(a);
 	tokenization(a);
-	parse_redirections(a, a->cmd);
+	if (parse_redirections(a, a->cmd))
+		return (1);
 	print_cmd_tokens(a->cmd);
 	print_quotes_list(a->quotes);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/16 18:11:16 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 17:42:06 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ void		init_signals(t_data *a);
 
 void		reset_shell(t_data *a, char **env);
 
-void		parsing(t_data *a);
-
 void		execution(t_data *a);
 
 // env_into_list.c
@@ -98,7 +96,9 @@ void		lstadd_back_quotes(t_quotes **lst, t_quotes *new);
 t_quotes	*lstnew_quotes(t_quotes *src);
 void		print_quotes_list(t_quotes *lst);
 
-void		parse_quotes(t_data *a);
+// quotes.c
+
+int			parse_quotes(t_data *a);
 char		is_inside_quotes(t_data *a, int i);
 
 // parse dollar to env    -> dollar.c
@@ -115,9 +115,9 @@ void		print_cmd_tokens(t_cmd *cmd);
 
 // parsing.c
 
-void	parsing(t_data *a);
-void	add_token(t_data *a, char *buffer);
-void	tokenization(t_data *a);
+int			parsing(t_data *a);
+void		add_token(t_data *a, char *buffer);
+void		tokenization(t_data *a);
 
 // parsing2.c
 
@@ -128,7 +128,8 @@ int			parse_redirection_token(t_data *a, int i);
 
 // parsing3.c
 
-void		parse_redirections(t_data *a, t_cmd *cmd);
+void		parse_empty_quotes(t_data *a, int i);
+int			parse_redirections(t_data *a, t_cmd *cmd);
 
 // utils.c
 
@@ -137,6 +138,11 @@ int			is_empty_quotes(t_data *a, int i);
 int			is_special_char(t_data *a, int i);
 char		*join_clean(char *s, char c);
 char		*join_2(char *s1, char *s2);
+
+// quit.c
+
+void		panic(char *message);
+void		red_flag(char *message);
 
 // builtins
 void		echo_builtin(t_data *a);

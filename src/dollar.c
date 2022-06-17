@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:37:46 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/17 17:23:40 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 18:53:37 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@ int	is_dollar(t_data *a, int i)
 int	is_env_char(char c)
 {
 	return (ft_isalnum(c) || c == '_');
+}
+
+void	dollar_last_return(t_data *a, int i)
+{
+	t_quotes	new;
+
+	new.start = i - 1;
+	new.type = '?';
+	a->line[i - 1] = '\0';
+	new.stop = i;
+	new.p = ft_itoa(a->last_ret);
+	if (!new.p)
+		panic("minishell: malloc failed");
+	lstadd_back_quotes(&a->quotes, lstnew_quotes(&new));
 }
 
 void	dollar_env(t_data *a, int i)
@@ -60,8 +74,8 @@ void	parse_dollar(t_data *a)
 		if (a->line[i] == '$' && is_inside_quotes(a, i) != '\'')
 		{
 			i++;
-			if (a->line[i] == '?') ;
-				//dollar_last_return(a);
+			if (a->line[i] == '?')
+				dollar_last_return(a, i);
 			else if (is_env_char(a->line[i]))
 				dollar_env(a, i);
 		}

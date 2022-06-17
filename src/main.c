@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:49 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/17 17:08:30 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:07:30 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int	main(int ac, char **av, char **env)
 {
-	(void)av;
 	t_data	a;
 
+	(void)av;
+	ft_bzero(&a, sizeof(t_data));
 	if (ac == 1)
 	{
 		init_signals(&a);
@@ -25,7 +26,7 @@ int	main(int ac, char **av, char **env)
 			reset_shell(&a, env);
 			a.line = readline(a.prompt);
 			if (!a.line)
-				break;
+				break ;
 			if (a.line && a.line[0] != '\0')
 			{	
 				add_history(a.line);
@@ -33,10 +34,7 @@ int	main(int ac, char **av, char **env)
 					continue ;
 				//execution(&a);
 			}
-			free(a.prompt); // fonction free_all ? 
-			a.prompt = NULL;
-			free(a.line);
-			a.line = NULL;
+			free_all(&a);
 		}
 		rl_clear_history();
 	}

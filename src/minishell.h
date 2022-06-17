@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/17 17:42:06 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 19:11:33 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,18 +59,18 @@ typedef struct s_env
 typedef struct s_data
 {
 	t_cmd			*cmd;
-	char			*line;	
-	char			**arg;
-	int				len;
-	char			*prompt;
 	t_quotes		*quotes;
 	t_env			*env;
-	struct termios	term;
+	char			*line;	
+	char			*prompt;
 	char			*buffer;
+	int				len;
+	struct termios	term;
+	int				last_ret;
 }					t_data;
 
 void		rl_replace_line(const char *text, int clear_undo);
-void 		rl_clear_history (void);
+void		rl_clear_history(void);
 char		*get_prompt(void);
 
 void		handler(int sig);
@@ -150,5 +150,17 @@ void		cd_builtin(t_data *a);
 void		exit_builtin(t_data *a);
 void		pwd_builtin(void);
 
+// free.c
+
+void		lstdelone_cmd(t_cmd *lst);
+void		lstclear_cmd(t_cmd **lst);
+void		free_all(t_data *a);
+
+// free2.c
+
+void		lst_delone_env(t_env *lst);
+void		lstclear_env(t_env **lst);
+void		lstdelone_quotes(t_quotes *lst);
+void		lstclear_quotes(t_quotes **lst);
 
 #endif

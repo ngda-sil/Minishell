@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:46:17 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/17 17:41:37 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 18:15:41 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	parse_infile(t_data *a, t_list *lst)
 	if (!lst->next->next)
 	{
 		red_flag("minishell: syntax error near unexpected token 'newline'");
+		a->last_ret = 258;
 		return (1);
 	}
 	return (0);
@@ -35,6 +36,7 @@ int	parse_outfile_trunc(t_data *a, t_list *lst)
 	if (!lst->next->next)
 	{
 		red_flag("minishell: syntax error near unexpected token 'newline'");
+		a->last_ret = 258;
 		return (1);
 	}
 	return (0);
@@ -46,6 +48,7 @@ int	parse_outfile_append(t_data *a, t_list *lst)
 	if (!lst->next->next)
 	{
 		red_flag("minishell: syntax error near unexpected token 'newline'");
+		a->last_ret = 258;
 		return (1);
 	}
 	return (0);

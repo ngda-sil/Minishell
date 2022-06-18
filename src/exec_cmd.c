@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/18 20:40:50 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/18 20:56:22 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,18 @@ int	is_builtin(t_cmd *cmd)
 void	exec_builtins(t_data *a, t_cmd *cmd)
 {
 	if (!ft_strcmp(cmd->args[0], "echo"))
-		echo_builtin(a, cmd->args);
+		echo_builtin(cmd->args);
 	if (!ft_strcmp(cmd->args[0], "cd"))
 		cd_builtin(a, cmd->args);
 	if (!ft_strcmp(cmd->args[0], "pwd"))
-		echo_builtin(a, cmd->args);
+		echo_builtin(cmd->args);
 	if (!ft_strcmp(cmd->args[0], "export"))
-		echo_builtin(a, cmd->args);
+		echo_builtin(cmd->args);
 	if (!ft_strcmp(cmd->args[0], "unset"))
-		echo_builtin(a, cmd->args);
+		echo_builtin(cmd->args);
 	if (!ft_strcmp(cmd->args[0], "env"))
-		echo_builtin(a, cmd->args);
+		echo_builtin(cmd->args);
+	exit(EXIT_SUCCESS);
 }
 
 void	exec_cmd(t_data *a, t_cmd *cmd, char **env)

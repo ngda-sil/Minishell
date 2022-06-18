@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:08:01 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/18 18:52:08 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/18 20:06:07 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_env	*env_into_list(char **env)
 	return (lst);
 }
 
-/*char	*find_value_env(t_env *lst, char *name)
+char	*ft_getenv(t_env *lst, char *name)
 {
 	while (lst)
 	{
@@ -75,7 +75,7 @@ t_env	*env_into_list(char **env)
 		lst = lst->next;
 	}
 	return (NULL);
-}*/
+}
 
 void	print_env_list(t_env *lst)
 {

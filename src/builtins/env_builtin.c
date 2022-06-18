@@ -1,50 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   env_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/14 11:09:10 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/16 20:43:58 by ngda-sil         ###   ########.fr       */
+/*   Created: 2022/06/16 11:53:54 by ngda-sil          #+#    #+#             */
+/*   Updated: 2022/06/16 23:36:28 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	is_only_n(char *str)
+void	print_env_list2(t_env *lst)
 {
-	int	i;
-
-	i = 0;
-	if (str[i] != '-')
-		return (1);
-	while (str[++i])
+	while (lst)
 	{
-		if (str[i] != 'n')
-			return (1);
+		printf("%s=%s\n", lst->name, lst->value);
+		lst = lst->next;
 	}
-	return (0);
 }
 
-void	echo_builtin(char **args)
-{	
-	int	i;
-	int	n;
-
-	i = 0;
-	n = 0;
-	if (args[1] && !is_only_n(args[1]))
-	{
-			n++;
-			i++;
-	}
-	while (args[++i])
-	{
-		ft_putstr_fd(args[i], 1);
-		if (args[i + 1])
-			write(1, " ", 1);
-	}
-	if (!n)
-		write(1, "\n", 1);
+void	env_builtin(t_data *a)
+{
+	if (!a->args[1])
+		print_env_list2(a->env);
+	else
+		ft_putstr_fd("Votre shell doit implémenter les builtins suivantes : env SANS aucune option NI argument. cf sujet p.5\n", 2);
 }

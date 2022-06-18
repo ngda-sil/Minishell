@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:34:44 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/15 16:14:54 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/18 17:41:33 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	*ft_strjoin4(char const *s1, char const *s2, char const *s3,
 	j = ft_strlen(s1);
 	if (!s1 || !s2 || !s3 || !s4)
 		return (NULL);
-	s = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3) + ft_strlen(s4),
-			sizeof(char));
+	s = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + ft_strlen(s3)
+			+ ft_strlen(s4) + 1, sizeof(char));
 	if (!s)
 		return (NULL);
 	while (i < j)
@@ -43,10 +43,11 @@ char	*ft_strjoin4(char const *s1, char const *s2, char const *s3,
 
 char	*get_prompt(void)
 {
-	char	*buf = NULL;
-	char	*user;
+	char	*tmp;
+	char	*prompt;
 
-	user = ft_strjoin4(getenv("USER"), "@", ft_strrchr(getcwd(buf, LINE_MAX), '/') + 1, ":~$ ");
-	free (buf);
-	return (user);
+	tmp = getcwd(NULL, 42);
+	prompt = ft_strjoin4(getenv("USER"), "@", ft_strrchr(tmp, '/') + 1, ":$ ");
+	free(tmp);
+	return (prompt);
 }

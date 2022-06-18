@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:49 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/15 17:03:43 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/17 21:09:20 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@ int	main(int ac, char **av, char **env)
 			if (a.line && a.line[0] != '\0')
 			{	
 				add_history(a.line);
-				//parsing(&a);
-				//execution(&a);
+			//	parsing(&a);
+				a.args = ft_split(a.line, ' ');
+				execution(&a);
 			}
 			free(a.prompt); // fonction free_all ? 
 			a.prompt = NULL;
@@ -39,6 +40,5 @@ int	main(int ac, char **av, char **env)
 		}
 		rl_clear_history();
 	}
-	while (1);
 	return (0);
 }

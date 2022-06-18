@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:08:01 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/17 18:06:24 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/18 21:05:21 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ t_env	*lstnew_env(char *line, int name_len)
 	if (!new)
 		return (NULL);
 	new->name = ft_substr(line, 0, name_len);
-	new->value = ft_strdup(line + name_len + 1);
+	if (ft_strlen(line) == (size_t)name_len)
+		new->value = NULL;
+	else
+		new->value = ft_strdup(line + name_len + 1);
 	new->next = NULL;
 	return (new);
 }
@@ -81,7 +84,7 @@ void	print_env_list(t_env *lst)
 {
 	while (lst)
 	{
-		printf("Name:%s, value:%s\n", lst->name, lst->value);
+		printf("Name:%s, value:(%s)\n", lst->name, lst->value);
 		lst = lst->next;
 	}
 }

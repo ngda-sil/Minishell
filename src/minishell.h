@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/17 21:09:27 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/19 01:41:28 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ typedef struct s_data
 	t_cmd			*cmd;
 	t_quotes		*quotes;
 	t_env			*env;
+	t_env			*new_env;
 	char			*line;	
 	char			*prompt;
 	char			*buffer;
@@ -149,11 +150,11 @@ void		red_flag(char *message);
 // builtins
 void		echo_builtin(char **args);
 void		cd_builtin(char **args);
-void		exit_builtin(t_data *a);
+void		exit_builtin(char **args);
 void		pwd_builtin(void);
 void		env_builtin(t_data *a);
 void		print_env_list2(t_env *lst);
-void		export_builtin(t_data *a);
+void		export_builtin(t_data *a, char **args);
 
 // free.c
 

@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:33:58 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/16 20:45:20 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/18 20:06:14 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	pwd_builtin(void)
 {
-	ft_putstr_fd(getenv("PWD"), 1);
+	ft_putstr_fd(ft_getenv("PWD"), 1);
 	write(1, "\n", 1);
 }

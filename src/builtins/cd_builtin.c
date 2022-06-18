@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:30:02 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/16 20:42:32 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/18 21:05:24 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	cd_builtin(char **args)
 	}
 	else
 	{
-		if (chdir(getenv("HOME")))
+		if (chdir(ft_getenv("HOME")))
 			ft_putstr_fd("Problem with chdir going to $HOME\n", 2);
 	}
 }

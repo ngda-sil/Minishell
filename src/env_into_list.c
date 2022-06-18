@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:08:01 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/17 18:06:24 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/18 18:52:08 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ t_env	*env_into_list(char **env)
 {
 	while (lst)
 	{
-		if (!ft_strncmp(name, lst->name, ft_strlen(lst->name)))
+		if (!ft_strncmp(name, lst->name, ft_strlen(lst->name) + 1))
 			return (lst->value);
 		lst = lst->next;
 	}

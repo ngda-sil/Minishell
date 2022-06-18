@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/17 21:09:27 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/18 18:46:41 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_cmd
 	t_list	*tokens;
 	char	**args;
 	char	*path;
+	pid_t	pid;
 	t_cmd	*next;
 }			t_cmd;
 
@@ -79,7 +80,7 @@ void		init_signals(t_data *a);
 
 void		reset_shell(t_data *a, char **env);
 
-void		execution(t_data *a);
+void		execution(t_data *a, t_cmd *cmd, char **env);
 
 // env_into_list.c
 
@@ -167,5 +168,9 @@ void		lst_delone_env(t_env *lst);
 void		lstclear_env(t_env **lst);
 void		lstdelone_quotes(t_quotes *lst);
 void		lstclear_quotes(t_quotes **lst);
+
+// path.c
+
+void		check_first_arg(t_data *a, t_cmd *cmd);
 
 #endif

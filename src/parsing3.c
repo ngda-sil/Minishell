@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:46:17 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/17 18:15:41 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/18 19:45:21 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 
 void	parse_empty_quotes(t_data *a, int i)
 {
-	if (a->buffer == NULL && is_special_char(a, i + 1))
-		add_token(a, ft_strdup(""));
+	if (is_special_char(a, i + 2))
+	{
+		if (i == 0)
+			add_token(a, ft_strdup(""));
+		else if (is_special_char(a, i - 1))
+			add_token(a, ft_strdup(""));
+	}
 }
 
 int	parse_infile(t_data *a, t_list *lst)

@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:51:18 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/18 19:31:24 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/18 20:10:16 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**get_dirs(t_data *a)
 	char	*tmp;
 	int		i;
 
-	env_path = find_value_env(a->env, "PATH");
+	env_path = ft_getenv(a->env, "PATH");
 	dirs = ft_split(env_path, ':');
 	i = 0;
 	while (dirs[i] != NULL)
@@ -76,9 +76,13 @@ void	tolower_str(char *s)
 }
 void	check_first_arg(t_data *a, t_cmd *cmd)
 {
-	tolower_str(cmd->args[0]);
-	if (ft_strchr(cmd->args[0], '/'))
-		cmd->path = ft_strdup(cmd->args[0]);
-	else
-		cmd->path = get_path(a, cmd);
+	while (cmd)
+	{
+		tolower_str(cmd->args[0]);
+		if (ft_strchr(cmd->args[0], '/'))
+			cmd->path = ft_strdup(cmd->args[0]);
+		else
+			cmd->path = get_path(a, cmd);
+		cmd = cmd->next;
+	}
 }

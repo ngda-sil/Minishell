@@ -45,23 +45,53 @@ void	tokenization(t_data *a)
 			parse_pipe(a);
 		else if ((a->line[i] == '<' || a->line[i] == '>')
 			&& !is_inside_quotes(a, i))
-			add_token(a, join_clean(NULL, a->line[i]));
+			i = parse_redirection_token(a, i);
 		else if (a->line[i] == '\0' && is_dollar(a, i))
 			i = parse_dollar_token(a, i);
 		else if (a->line[i] == '\0' && is_empty_quotes(a, i))
-			add_token(a, ft_strdup(""));
+			parse_empty_quotes(a, i);
 		else
 			parse_args(a, i);
 		i++;
 	}
 }
 
-void	parsing(t_data *a)
+void	tokens_to_args(t_cmd *cmd)
+{
+	t_list	*lst;
+	int		nb_tokens;
+	int		i;
+
+	while (cmd)
+	{
+		nb_tokens = ft_lstsize(cmd->tokens);
+		cmd->args = ft_calloc(nb_tokens + 1, sizeof(char *));
+		if (!cmd->args)
+			panic("minishell: malloc failed");
+		lst = cmd->tokens;
+		i = 0;
+		while (lst)
+		{
+			cmd->args[i] = lst->content;
+			i++;
+			lst = lst->next;
+		}
+		cmd = cmd->next;
+	}
+}
+
+int	parsing(t_data *a)
 {
 	a->len = ft_strlen(a->line);
-	parse_quotes(a);
+	if (parse_quotes(a))
+		return (1);
 	parse_dollar(a);
 	tokenization(a);
+	if (parse_redirections(a, a->cmd))
+		return (1);
+	tokens_to_args(a->cmd);
 	//print_cmd_tokens(a->cmd);
+	print_cmd_args(a->cmd);
 	//print_quotes_list(a->quotes);
+	return (0);
 }

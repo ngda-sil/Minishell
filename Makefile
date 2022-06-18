@@ -29,25 +29,29 @@ RL_LIB   	= -lreadline -L ~/.brew/Cellar/readline/8.1.2/lib
 SRC_PATH 	= ./src/
 SRC 		= $(addprefix $(SRC_PATH), $(FILES))
 OBJ			= $(SRC:.c=.o)
-FILES 		= main.c 			\
-			  signal.c 			\
-			  prompt.c 			\
-			  env_into_list.c	\
-			  parsing.c			\
-			  parsing2.c		\
-			  quotes.c			\
-			  quotes_list.c		\
-			  reset_shell.c		\
-			  dollar.c			\
-			  cmd_list.c		\
-			  utils.c			\
-			  execution.c		\
-			  builtins/echo_builtin.c	\
-			  builtins/cd_builtin.c		\
-			  builtins/exit_builtin.c	\
-			  builtins/pwd_builtin.c	\
-			  builtins/env_builtin.c	\
-			  builtins/export_builtin.c	\
+FILES 		= main.c 					\
+			  signal.c 					\
+			  prompt.c 					\
+			  env_into_list.c			\
+			  parsing.c					\
+			  parsing2.c				\
+			  parsing3.c				\
+			  quotes.c					\
+			  quotes_list.c				\
+			  reset_shell.c				\
+			  dollar.c					\
+			  cmd_list.c				\
+			  utils.c					\
+			  quit.c					\
+			  free.c					\
+			  free2.c					\
+			 # execution.c		\
+			 # builtins/echo_builtin.c	\
+			 # builtins/cd_builtin.c		\
+			 # builtins/exit_builtin.c	\
+			 # builtins/pwd_builtin.c	\
+			 # builtins/env_builtin.c	\
+			 # builtins/export_builtin.c	\
 # ==============================================================================
 
 

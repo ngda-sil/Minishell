@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 14:11:30 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/15 16:41:04 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 16:51:25 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ int	is_special_char(t_data *a, int i)
 	char	c;
 
 	c = a->line[i];
-	if (c == '|' || c == '<' || c == '>')
+	if ((c == '|' || c == '<' || c == '>') && !is_inside_quotes(a, i))
 		return (1);
 	else if (ft_isspace(c) && !is_inside_quotes(a, i))
 		return (1);
-	else if (c == '\0' && is_dollar(a, i))
-		return (0);
+	else if (c == '\0' && is_empty_quotes(a, i))
+		return (1);
 	else if (a->len == i)
 		return (1);
 	else

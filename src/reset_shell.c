@@ -13,8 +13,9 @@
 #include "minishell.h"
 
 void	reset_shell(t_data *a, char **env)
-{	
-	ft_bzero(a, sizeof(t_data));
+{
+	free_all(a);
 	a->env = env_into_list(env);
+	rl_replace_line("", 0);
 	a->prompt = get_prompt();
 }

@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 14:49:51 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/15 16:27:28 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/17 20:22:32 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,25 @@ void	print_cmd_tokens(t_cmd *cmd)
 			printf("\"%s\"\n", (char *)lst->content);
 			lst = lst->next;
 		}
+		cmd = cmd->next;
+	}
+}
+
+void	print_cmd_args(t_cmd *cmd)
+{
+	int		i;
+
+	printf("--- Print cmd args ---\n");
+	while (cmd)
+	{
+		printf("cmd:\n");
+		i = 0;
+		while (cmd->args[i])
+		{
+			printf("\"%s\" ", cmd->args[i]);
+			i++;
+		}
+		printf("\n");
 		cmd = cmd->next;
 	}
 }

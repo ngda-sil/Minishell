@@ -13,6 +13,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <sys/errno.h>
 # include <dirent.h>
 # include <fcntl.h>
 # include <readline/readline.h>
@@ -147,10 +148,13 @@ void		panic(char *message);
 void		red_flag(char *message);
 
 // builtins
-void		echo_builtin(t_data *a);
-void		cd_builtin(t_data *a);
+void		echo_builtin(char **args);
+void		cd_builtin(char **args);
 void		exit_builtin(t_data *a);
 void		pwd_builtin(void);
+void		env_builtin(t_data *a);
+void		print_env_list2(t_env *lst);
+void		export_builtin(t_data *a);
 
 // free.c
 

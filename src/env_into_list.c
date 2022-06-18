@@ -66,7 +66,7 @@ t_env	*env_into_list(char **env)
 	return (lst);
 }
 
-char	*find_value_env(t_env *lst, char *name)
+/*char	*find_value_env(t_env *lst, char *name)
 {
 	while (lst)
 	{
@@ -75,7 +75,7 @@ char	*find_value_env(t_env *lst, char *name)
 		lst = lst->next;
 	}
 	return (NULL);
-}
+}*/
 
 void	print_env_list(t_env *lst)
 {

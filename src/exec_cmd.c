@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/18 20:56:22 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/20 00:38:45 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,33 @@ void	exec_builtins(t_data *a, t_cmd *cmd)
 	if (!ft_strcmp(cmd->args[0], "cd"))
 		cd_builtin(a, cmd->args);
 	if (!ft_strcmp(cmd->args[0], "pwd"))
-		echo_builtin(cmd->args);
+		pwd_builtin(a);
 	if (!ft_strcmp(cmd->args[0], "export"))
-		echo_builtin(cmd->args);
+		export_builtin(a, cmd->args);
 	if (!ft_strcmp(cmd->args[0], "unset"))
 		echo_builtin(cmd->args);
 	if (!ft_strcmp(cmd->args[0], "env"))
-		echo_builtin(cmd->args);
-	exit(EXIT_SUCCESS);
+		env_builtin(a, cmd->args);
+//	exit(EXIT_SUCCESS);
 }
 
 void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
 {
 	int	status;
 
+	if (is_builtin(cmd))
+	{
+		exec_builtins(a, cmd);
+		return ;
+	}
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 		panic("minishell: fork failed");
 	if (cmd->pid == 0)
 	{
 		//cmd->path = get_cmd_path(a, cmd);
-		if (is_builtin(cmd))
-			exec_builtins(a, cmd);
+//		if (is_builtin(cmd))
+//			exec_builtins(a, cmd);
 		execve(cmd->path, cmd->args, env);
 		panic("minishell: execve failed");
 	}

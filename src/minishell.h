@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/18 20:54:06 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/20 00:38:47 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,11 @@ char		is_inside_quotes(t_data *a, int i);
 void		parse_dollar(t_data *a);
 int			is_dollar(t_data *a, int i);
 
+// prompt.c
+
+char    *ft_strjoin4(char const *s1, char const *s2, char const *s3,
+                        char const *s4);
+
 // utils to use t_cmd linked list ->cmd_list.c
 
 t_cmd		*lstlast_cmd(t_cmd *lst);
@@ -151,8 +156,8 @@ void		red_flag(char *message);
 // builtins
 void		echo_builtin(char **args);
 void		cd_builtin(t_data *a, char **args);
-void		exit_builtin(t_data *a);
-void		pwd_builtin(t_data *a, char **args);
+void		exit_builtin(char **args);
+void		pwd_builtin(t_data *a);
 void		env_builtin(t_data *a, char **args);
 void		export_builtin(t_data *a, char **args);
 

@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/19 01:41:28 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/18 20:54:06 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_cmd
 	t_list	*tokens;
 	char	**args;
 	char	*path;
+	pid_t	pid;
 	t_cmd	*next;
 }			t_cmd;
 
@@ -80,7 +81,7 @@ void		init_signals(t_data *a);
 
 void		reset_shell(t_data *a, char **env);
 
-void		execution(t_data *a);
+void		execution(t_data *a, t_cmd *cmd, char **env);
 
 // env_into_list.c
 
@@ -88,7 +89,7 @@ t_env		*lstlast_env(t_env *lst);
 void		lstadd_back_env(t_env **lst, t_env *new);
 t_env		*lstnew_env(char *line, int name_len);
 t_env		*env_into_list(char **env);
-char		*find_value_env(t_env *lst, char *name);
+char		*ft_getenv(t_env *lst, char *name);
 void		print_env_list(t_env *lst);
 
 // utils to t_quotes linked list -> quotes_list.c
@@ -149,11 +150,10 @@ void		red_flag(char *message);
 
 // builtins
 void		echo_builtin(char **args);
-void		cd_builtin(char **args);
-void		exit_builtin(char **args);
-void		pwd_builtin(void);
-void		env_builtin(t_data *a);
-void		print_env_list2(t_env *lst);
+void		cd_builtin(t_data *a, char **args);
+void		exit_builtin(t_data *a);
+void		pwd_builtin(t_data *a, char **args);
+void		env_builtin(t_data *a, char **args);
 void		export_builtin(t_data *a, char **args);
 
 // free.c
@@ -168,5 +168,9 @@ void		lst_delone_env(t_env *lst);
 void		lstclear_env(t_env **lst);
 void		lstdelone_quotes(t_quotes *lst);
 void		lstclear_quotes(t_quotes **lst);
+
+// path.c
+
+void		check_first_arg(t_data *a, t_cmd *cmd);
 
 #endif

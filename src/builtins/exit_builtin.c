@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:18:49 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/16 21:02:51 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/18 16:40:22 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,25 @@ long long	ft_atoll(const char *str)
 	return ((long long)(sign * res));
 }
 
-void	exit_builtin(t_data *a)
+void	exit_builtin(char **args)
 {
 	long long		status;
 
-	if (!a->args[1])
+	if (!args[1])
 	{
 		ft_putstr_fd("exit\n", 1);
 		exit (0);
 	}
-	if (LLONG_MAX <= ft_atoll(a->args[1]) || LLONG_MIN >= ft_atoll(a->args[1]))
+	if (LLONG_MAX <= ft_atoll(args[1]) || LLONG_MIN >= ft_atoll(args[1]))
 	{
 		ft_putstr_fd("exit\nminishell: exit: ", 2);
-		ft_putstr_fd(a->args[1], 2);
+		ft_putstr_fd(args[1], 2);
 		ft_putstr_fd(": numeric argument required\n", 2);
 		exit (255);
 	}
-	if (!a->args[2])
+	if (!args[2])
 	{
-		status = ft_atoll(a->args[1]);
+		status = ft_atoll(args[1]);
 		{
 			ft_putstr_fd("exit\n", 1);
 			exit(status % 256);

@@ -63,6 +63,7 @@ typedef struct s_data
 	t_cmd			*cmd;
 	t_quotes		*quotes;
 	t_env			*env;
+	t_env			*new_env;
 	char			*line;	
 	char			*prompt;
 	char			*buffer;

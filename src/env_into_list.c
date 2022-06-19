@@ -44,7 +44,10 @@ t_env	*lstnew_env(char *line, int name_len)
 	if (!new)
 		return (NULL);
 	new->name = ft_substr(line, 0, name_len);
-	new->value = ft_strdup(line + name_len + 1);
+	if (ft_strlen(line) == (size_t)name_len)
+		new->value = NULL;
+	else
+		new->value = ft_strdup(line + name_len + 1);
 	new->next = NULL;
 	return (new);
 }
@@ -81,7 +84,7 @@ void	print_env_list(t_env *lst)
 {
 	while (lst)
 	{
-		printf("Name:%s, value:%s\n", lst->name, lst->value);
+		printf("Name:%s, value:(%s)\n", lst->name, lst->value);
 		lst = lst->next;
 	}
 }

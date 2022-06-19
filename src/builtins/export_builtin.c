@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 23:46:36 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/17 21:09:06 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/19 01:41:31 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,24 +53,116 @@ void	sort_env_list(t_env *lst)
 	while (--i > 0)
 	{
 		j = -1;
-		while (++j < i - 2)
+		while (++j < i - 1)
 			if (ft_strcmp(p[j]->name, p[j + 1]->name) > 0)
 				swap_env(&p[j], &p[j + 1]);
 	}
 	j = -1;
 	while (p[++j])
-		printf("declare -x %s=\"%s\"\n", p[j]->name, p[j]->value);
+	{
+		if (!p[j]->value)
+			printf("declare -x %s\n", p[j]->name);
+		else
+			printf("declare -x %s=\"%s\"\n", p[j]->name, p[j]->value);
+	}
 	free(p);
 }
 
-void	export_builtin(t_data *a)
+void	add_to_new_env(t_env *lst, char *arg)
 {
-	if (!a->args[1])
+	int	name_len;
+
+	if (ft_strchr(arg, '='))
+		name_len = ft_strchr(arg, '=') - arg;
+	else
+		name_len = ft_strlen(arg);
+	lstadd_back_env(&lst, lstnew_env(arg, name_len));
+	printf("(%i) (%s) (%p) (%p)\n", name_len, lst->name, &lst, lst);
+}
+
+int	is_in_new_env(t_env *lst, char *arg)
+{
+	int	name_len;
+
+	if (!lst)
+	{
+		printf("5555\n");
+		return (1);
+	}
+	while (lst->next)
+	{
+		name_len = ft_strlen(lst->name);
+		//printf("name_len (%i) lst-name (%s) arg[name_len] (%c)\n", name_len, lst->name, arg[name_len]);
+	//	printf("result strncmp (%i)\n", ft_strncmp(lst->name, arg, name_len));
+		if (!ft_strncmp(lst->name, arg, name_len - 1) && (!arg[name_len] || arg[name_len] == '='))
+				return (0);
+		lst = lst->next;
+	}
+	return (1);
+}
+
+int	check_arg_name(char *arg)
+{
+	int	i;
+
+	i = 0;
+	if (ft_isdigit(arg[i]))
+		return (1);
+	while (arg[i])
+	{
+		if (!ft_isalnum(arg[i]) && arg[i] != '"' && arg[i] != '=')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+void	replace_in_new_env(t_env *lst, char *arg)
+{
+	int		name_len;
+	char	*tmp;
+
+	while (lst->next)
+	{
+		name_len = ft_strlen(lst->name);
+		if (!ft_strncmp(lst->name, arg, name_len) && (!arg[name_len] || arg[name_len] == '='))
+		{	
+			if (!arg[name_len])
+				lst->name = ft_substr(arg, name_len - 1, ft_strlen(arg));
+			else
+			{
+				tmp = lst->name;
+				lst->name = ft_substr(arg, name_len, ft_strlen(arg));
+				free(tmp);
+			}
+				break;
+		}
+		lst = lst->next;
+	}
+}
+
+void	export_builtin(t_data *a, char **args)
+{
+	int		i;
+
+	i = 1;
+	if (!args[i])
 		sort_env_list(a->env);
-	// 1 checker si le name existe ?
-	// 	1.1 si oui -> ecraser valeur env.
-	// 	1.2 si non -> ajouter a la liste new;
-	// 2 si plusieurs arg le meme ecraser le premier par le deuxieme
-	// 3 checker si xxx=xxxx -> faux export apparait pas dans env mais apparait dans export SA
-	// a faire list new;
+	else
+	{
+		while (args[i])
+		{
+			if (check_arg_name(args[i]))
+			{
+				red_flag("minishell : not a valid identifier");
+				break;
+			}
+			if (!is_in_new_env(a->new_env, args[i]))
+				replace_in_new_env(a->new_env, args[i]);
+			else
+				add_to_new_env(a->new_env, args[i]);
+			i++;
+		}
+	}
+	print_env_list(a->new_env);
 }

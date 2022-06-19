@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 12:09:36 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/17 17:48:53 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/19 01:34:53 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,18 @@ int	ft_strcmpmin_maj(char *s1, char *s2)
 void	is_builtin(t_data *a)
 {
 
-	if (!ft_strcmpmin_maj(a->args[0], "echo")) //a->cmd->args[0]
-		echo_builtin(a->args);
-	if (!ft_strcmpmin_maj(a->args[0], "pwd"))
+	if (!ft_strcmpmin_maj(a->cmd->args[0], "echo"))
+		echo_builtin(a->cmd->args);
+	/*if (!ft_strcmpmin_maj(a->cmd->args[0], "pwd"))
 		pwd_builtin();
-	if (!ft_strcmpmin_maj(a->args[0], "cd"))
-		cd_builtin(a->args);
-	if (!ft_strcmpmin_maj(a->args[0], "env"))
+	if (!ft_strcmpmin_maj(a->cmd->args[0], "cd"))
+		cd_builtin(a->cmd->args);*/
+	if (!ft_strcmpmin_maj(a->cmd->args[0], "env"))
 		env_builtin(a);
-	if (!ft_strcmpmin_maj(a->args[0], "export"))
-		export_builtin(a);
-	if (!ft_strcmpmin_maj(a->args[0], "exit"))
-		exit_builtin(a);
+	if (!ft_strcmpmin_maj(a->cmd->args[0], "export"))
+		export_builtin(a, a->cmd->args);
+	if (!ft_strcmpmin_maj(a->cmd->args[0], "exit"))
+		exit_builtin(a->cmd->args);
 }
 
 void	execution(t_data *a)

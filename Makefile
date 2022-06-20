@@ -6,7 +6,7 @@
 #    By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 19:44:57 by ngda-sil          #+#    #+#              #
-#    Updated: 2022/06/20 16:57:56 by ngda-sil         ###   ########.fr        #
+#    Updated: 2022/06/20 17:40:43 by amuhleth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,13 +47,14 @@ FILES 		= main.c 					\
 			  free2.c					\
 			  exec_cmd.c				\
 			  path.c					\
+			  pipe.c					\
 			  builtins/cd_builtin.c		\
 			  builtins/echo_builtin.c	\
 			  builtins/env_builtin.c	\
+			  builtins/pwd_builtin.c	\
 			  builtins/exit_builtin.c	\
 			  builtins/export_builtin.c	\
 			  builtins/export_utils.c	\
-			  builtins/pwd_builtin.c	\
         
 # =============================================================================
 

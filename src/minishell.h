@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/20 17:50:38 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/20 19:19:36 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct s_cmd
 	pid_t	pid;
 	int		in;
 	int		out;
+	int		infile;
+	int		outfile;
 	int		fd[2];
 	t_cmd	*next;
 }			t_cmd;
@@ -193,6 +195,7 @@ void		check_first_arg(t_data *a, t_cmd *cmd);
 // pipe.c
 
 void		set_pipe(t_cmd *cmd, int first);
-void		redirect(int in, int out);
+void		set_redirections(t_cmd *cmd);
+void		redirect(t_cmd *cmd, int in, int out);
 
 #endif

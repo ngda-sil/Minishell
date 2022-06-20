@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/20 18:27:07 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/20 19:23:47 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
 		panic("minishell: fork failed");
 	if (cmd->pid == 0)
 	{
-		redirect(cmd->in, cmd->out);
+		printf("in:%d, out:%d\n", cmd->in, cmd->out);
+		redirect(cmd, cmd->in, cmd->out);
 		execve(cmd->path, cmd->args, env);
 		panic("minishell: execve failed");
 	}
@@ -72,6 +73,7 @@ void	execution(t_data *a, t_cmd *cmd, char **env)
 	while (cmd)
 	{
 		set_pipe(cmd, first);
+		set_redirections(cmd);
 		if (is_builtin(cmd))
 			exec_builtins(a, cmd);
 		else

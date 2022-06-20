@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 14:49:51 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/18 16:33:27 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:42:15 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_cmd	*lstnew_cmd(void)
 	new = ft_calloc(sizeof(t_cmd), 1);
 	if (!new)
 		return (NULL);
+	new->out = 1;
 	return (new);
 }
 

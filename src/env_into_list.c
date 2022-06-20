@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:08:01 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/18 20:06:07 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/19 20:06:05 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	lstadd_back_env(t_env **lst, t_env *new)
 	}
 }
 
-t_env	*lstnew_env(char *line, int name_len)
+t_env	*lstnew_env(char *line, int name_len, int sep)
 {
 	t_env	*new;
 
@@ -44,7 +44,10 @@ t_env	*lstnew_env(char *line, int name_len)
 	if (!new)
 		return (NULL);
 	new->name = ft_substr(line, 0, name_len);
-	new->value = ft_strdup(line + name_len + 1);
+	if (ft_strlen(line) == (size_t)name_len)
+		new->value = NULL;
+	else
+		new->value = ft_strdup(line + name_len + 1 + sep);
 	new->next = NULL;
 	return (new);
 }
@@ -60,7 +63,7 @@ t_env	*env_into_list(char **env)
 	while (env[i])
 	{
 		name_len = ft_strchr(env[i], '=') - env[i];
-		lstadd_back_env(&lst, lstnew_env(env[i], name_len));
+		lstadd_back_env(&lst, lstnew_env(env[i], name_len, 0));
 		i++;
 	}
 	return (lst);
@@ -81,7 +84,7 @@ void	print_env_list(t_env *lst)
 {
 	while (lst)
 	{
-		printf("Name:%s, value:%s\n", lst->name, lst->value);
+		printf("Name:%s, value:(%s)\n", lst->name, lst->value);
 		lst = lst->next;
 	}
 }

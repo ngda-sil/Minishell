@@ -6,14 +6,13 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 16:33:58 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/16 20:45:20 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/19 22:22:27 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	pwd_builtin(void)
+void	pwd_builtin(t_data *a)
 {
-	ft_putstr_fd(getenv("PWD"), 1);
-	write(1, "\n", 1);
+	printf("%s\n", ft_getenv(a->env, "PWD"));
 }

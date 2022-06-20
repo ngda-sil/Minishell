@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 23:46:36 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/17 21:09:06 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/20 16:53:37 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,43 +34,72 @@ void	swap_env(t_env **p1, t_env **p2)
 	*p2 = tmp;
 }
 
-void	sort_env_list(t_env *lst)
+void	sort_env_list(t_env *lst, t_env *lst2)
 {
 	int		i;
 	int		j;
 	t_env	**p;
 	t_env	*temp_l;
+	(void)lst2;
 
 	j = -1;
 	i = env_lstsize(lst);
 	temp_l = lst;
-	p = ft_calloc(i, sizeof(t_env *));
+	p = ft_calloc(i, sizeof(t_env *) + 1);
 	while (++j < i)
 	{
 		p[j] = temp_l;
 		temp_l = temp_l->next;
 	}
+	while (j < i)
+	{
+		p[j] = temp_l;
+		temp_l = temp_l->next;
+		j++;
+	}
 	while (--i > 0)
 	{
 		j = -1;
-		while (++j < i - 2)
+		while (++j < i - 1)
 			if (ft_strcmp(p[j]->name, p[j + 1]->name) > 0)
 				swap_env(&p[j], &p[j + 1]);
 	}
 	j = -1;
 	while (p[++j])
-		printf("declare -x %s=\"%s\"\n", p[j]->name, p[j]->value);
+	{
+		if (p[j]->value)
+			printf("declare -x %s=\"%s\"\n", p[j]->name, p[j]->value);
+		else
+			printf("declare -x %s\n", p[j]->name);
+	}
 	free(p);
 }
 
-void	export_builtin(t_data *a)
+void	export_builtin(t_data *a, char **args)
 {
-	if (!a->args[1])
-		sort_env_list(a->env);
-	// 1 checker si le name existe ?
-	// 	1.1 si oui -> ecraser valeur env.
-	// 	1.2 si non -> ajouter a la liste new;
-	// 2 si plusieurs arg le meme ecraser le premier par le deuxieme
-	// 3 checker si xxx=xxxx -> faux export apparait pas dans env mais apparait dans export SA
-	// a faire list new;
+	int		i;
+	
+	i = 1;
+	if (!args[i])
+		sort_env_list(a->env, a->new_env);
+	else
+	{
+		while (args[i])
+		{
+			if (check_arg_name(args[i]))
+			{
+				red_flag("minishell : not a valid identifier");
+				break;
+			}
+			if (!is_in_new_env(a->new_env, args[i]))
+				replace_in_new_env(a->new_env, args[i]);
+			else
+				add_to_new_env(&a->new_env, args[i]);
+			i++;
+		}
+		print_env_list((a->new_env));
+	}
 }
+
+
+//export TEST="ls       -l     - a" ; echo $TEST ; $LS

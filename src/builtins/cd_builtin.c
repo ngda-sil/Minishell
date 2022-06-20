@@ -6,44 +6,25 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:30:02 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/18 21:05:24 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/20 16:57:49 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	cd_error_msg(void)
-{
-	if (errno == 2)
-		ft_putstr_fd(": No such file or directory\n", 2);
-	if (errno == 5)
-		ft_putstr_fd(": Inputut/output error", 2);
-	if (errno == 13)
-		ft_putstr_fd(": Permission denied\n", 2);
-	if (errno == 14)
-		ft_putstr_fd(": Bad address\n", 2);
-	if (errno == 20)
-		ft_putstr_fd(": Not a directory\n", 2);
-	if (errno == 62)
-		ft_putstr_fd(": Too many levels of symbolic links\n", 2);
-	if (errno == 63)
-		ft_putstr_fd(": File name too long\n", 2);
-}
-
-void	cd_builtin(char **args)
+void	cd_builtin(t_data *a, char **args)
 {
 	if (args[1])
 	{
 		if (chdir(args[1]))
-		{
-			ft_putstr_fd("minishell: cd: ", 2);
-			ft_putstr_fd(args[1], 2);
-			cd_error_msg();
-		}
+			red_flag(ft_strjoin4("minishell: cd : ", args[1], ": ",strerror(errno)));
 	}
 	else
 	{
-		if (chdir(ft_getenv("HOME")))
-			ft_putstr_fd("Problem with chdir going to $HOME\n", 2);
+		if (chdir(ft_getenv(a->env, "HOME")))
+			red_flag("Problem with chdir going to $HOME\n");
 	}
 }
+
+// echo $OLDPWD $PWD ; cd / ; echo $OLDPWD $PWD 
+// a gerer exec_test 'mkdir test_dir ; cd test_dir ; rm -rf ../test_dir ; cd . ; pwd ; cd . ; pwd ; cd .. ; pwd'

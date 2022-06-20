@@ -53,7 +53,6 @@ FILES 		= main.c 					\
 			  builtins/exit_builtin.c	\
 			  builtins/export_builtin.c	\
 			  builtins/export_utils.c	\
-			  builtins/pwd_builtin.c	\
         
 # =============================================================================
 

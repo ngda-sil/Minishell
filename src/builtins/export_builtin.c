@@ -72,13 +72,19 @@ void	add_to_new_env(t_env **lst, char *arg)
 {
 	int	name_len;
 	
-	if (ft_strchr(arg, '='))
-		name_len = ft_strchr(arg, '=') - arg;
 	if (ft_strchr(arg, '+'))
+	{
 		name_len = ft_strchr(arg, '+') - arg;
-	else
-		name_len = ft_strlen(arg);
-	lstadd_back_env(&(*lst), lstnew_env(arg, name_len));
+		lstadd_back_env(&(*lst), lstnew_env(arg, name_len, 1));
+	}
+	else 
+	{
+		if (ft_strchr(arg, '='))
+			name_len = ft_strchr(arg, '=') - arg;
+		else
+			name_len = ft_strlen(arg);
+		lstadd_back_env(&(*lst), lstnew_env(arg, name_len, 0));
+	}
 }
 
 
@@ -108,10 +114,10 @@ int	check_arg_name(char *arg)
 	i = -1;
 	while (arg[++i])
 	{
-		if (!ft_isalnum(arg[i]) && arg[i] != '"' && arg[i] != '=')
+		if (!ft_isalnum(arg[i]) && arg[i] != '=')
 		{
-			if (arg[i] == '+' && arg[i + 1] == '=')
-				continue;
+			if (arg[i] != '=' || (arg[i] == '+' && arg[i + 1] == '='))
+				return(0);
 			return (1);
 		}
 	}
@@ -134,10 +140,17 @@ void	replace_in_new_env(t_env *lst, char *arg)
 			break;
 		}
 		if (!ft_strncmp(lst->name, arg, name_len) && (arg[name_len] == '+'))
-		{	
-			tmp = lst->value;
-			lst->value = ft_strjoin(tmp, &arg[name_len + 2]);
-			free(tmp);
+		{
+			if (lst->value)
+			{
+				tmp = lst->value;
+				lst->value = ft_strjoin(tmp, &arg[name_len + 2]);
+				free(tmp);
+			}
+			else
+			{
+				lst->value = ft_strdup(&arg[name_len + 2]);
+			}
 			break;
 		}
 
@@ -167,6 +180,7 @@ void	export_builtin(t_data *a, char **args)
 				add_to_new_env(&a->new_env, args[i]);
 			i++;
 		}
-		print_env_list((a->new_env));
+		//print_env_list((a->new_env));
 	}
 }
+

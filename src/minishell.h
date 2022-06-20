@@ -87,7 +87,7 @@ void		execution(t_data *a, t_cmd *cmd, char **env);
 
 t_env		*lstlast_env(t_env *lst);
 void		lstadd_back_env(t_env **lst, t_env *new);
-t_env		*lstnew_env(char *line, int name_len);
+t_env		*lstnew_env(char *line, int name_len, int sep);
 t_env		*env_into_list(char **env);
 char		*ft_getenv(t_env *lst, char *name);
 void		print_env_list(t_env *lst);

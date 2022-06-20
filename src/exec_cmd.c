@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/20 00:38:45 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:27:07 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,40 +43,40 @@ void	exec_builtins(t_data *a, t_cmd *cmd)
 		echo_builtin(cmd->args);
 	if (!ft_strcmp(cmd->args[0], "env"))
 		env_builtin(a, cmd->args);
-//	exit(EXIT_SUCCESS);
 }
 
 void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
 {
 	int	status;
 
-	if (is_builtin(cmd))
-	{
-		exec_builtins(a, cmd);
-		return ;
-	}
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 		panic("minishell: fork failed");
 	if (cmd->pid == 0)
 	{
-		//cmd->path = get_cmd_path(a, cmd);
-//		if (is_builtin(cmd))
-//			exec_builtins(a, cmd);
+		redirect(cmd->in, cmd->out);
 		execve(cmd->path, cmd->args, env);
 		panic("minishell: execve failed");
 	}
 	else if (cmd->pid > 0)
-		wait(&status);
+		waitpid(cmd->pid, &status, 0);
 	if (WIFEXITED(status))
 		a->last_ret = WEXITSTATUS(status);
 }
 
 void	execution(t_data *a, t_cmd *cmd, char **env)
 {
+	int	first;
+
+	first = 1;
 	while (cmd)
 	{
-		exec_cmd(a, cmd, env);
+		set_pipe(cmd, first);
+		if (is_builtin(cmd))
+			exec_builtins(a, cmd);
+		else
+			exec_cmd(a, cmd, env);
 		cmd = cmd->next;
+		first = 0;
 	}
 }

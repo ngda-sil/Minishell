@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/20 16:57:53 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/20 17:50:38 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ typedef struct s_cmd
 	char	**args;
 	char	*path;
 	pid_t	pid;
+	int		in;
+	int		out;
+	int		fd[2];
 	t_cmd	*next;
 }			t_cmd;
 
@@ -174,6 +177,7 @@ void		replace_in_new_env(t_env *lst, char *arg);
 void		lstdelone_cmd(t_cmd *lst);
 void		lstclear_cmd(t_cmd **lst);
 void		free_all(t_data *a);
+void		free_each_time(t_data *a);
 
 // free2.c
 
@@ -185,5 +189,10 @@ void		lstclear_quotes(t_quotes **lst);
 // path.c
 
 void		check_first_arg(t_data *a, t_cmd *cmd);
+
+// pipe.c
+
+void		set_pipe(t_cmd *cmd, int first);
+void		redirect(int in, int out);
 
 #endif

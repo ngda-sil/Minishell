@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reset_shell.c                                      :+:      :+:    :+:   */
+/*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/10 17:09:25 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/20 17:34:22 by amuhleth         ###   ########.fr       */
+/*   Created: 2022/06/20 17:21:55 by amuhleth          #+#    #+#             */
+/*   Updated: 2022/06/20 18:37:11 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	reset_shell(t_data *a, char **env)
+void	redirect(int in, int out)
 {
-	static int	count;
+	dup2(in, 0);
+	dup2(out, 1);
+	if (in != 0)
+		close(in);
+	if (out != 1)
+		close(out);
+}
 
-	if (count == 0)
-		a->env = env_into_list(env);
-	//free_all(a);
-	free_each_time(a);
-	rl_replace_line("", 0);
-	a->prompt = get_prompt();
+void	set_pipe(t_cmd *cmd, int first)
+{
+	cmd->out = 1;
+	if (!first)
+	{
+		cmd->in = cmd->fd[0];
+		close(cmd->fd[1]);
+	}
+	if (cmd->next)
+	{
+		pipe(cmd->next->fd);
+		cmd->out = cmd->next->fd[1];
+	}
+	printf("in:%d, out:%d\n", cmd->in, cmd->out);
 }

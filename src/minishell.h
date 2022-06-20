@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/20 00:38:47 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/20 16:57:53 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,12 +154,20 @@ void		panic(char *message);
 void		red_flag(char *message);
 
 // builtins
+
 void		echo_builtin(char **args);
 void		cd_builtin(t_data *a, char **args);
 void		exit_builtin(char **args);
 void		pwd_builtin(t_data *a);
 void		env_builtin(t_data *a, char **args);
 void		export_builtin(t_data *a, char **args);
+
+// export utils
+
+void		add_to_new_env(t_env **lst, char *arg);
+int			is_in_new_env(t_env *lst, char *arg);
+int			check_arg_name(char *arg);
+void		replace_in_new_env(t_env *lst, char *arg);
 
 // free.c
 

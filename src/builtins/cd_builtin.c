@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:30:02 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/19 22:28:40 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/20 16:57:49 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ void	cd_builtin(t_data *a, char **args)
 {
 	if (args[1])
 	{
-		if (!ft_strncmp(args[1], "/Users", 6))
-			if (chdir("/Users"))
-				red_flag(ft_strjoin4("minishell: cd : ", args[1], ": ",strerror(errno)));
 		if (chdir(args[1]))
 			red_flag(ft_strjoin4("minishell: cd : ", args[1], ": ",strerror(errno)));
 	}

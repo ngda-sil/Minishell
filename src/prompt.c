@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:34:44 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/19 21:48:06 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/21 02:55:47 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ char	*ft_strjoin4(char const *s1, char const *s2, char const *s3,
 	return (s);
 }
 
-char	*get_prompt(void)
+char	*get_prompt(t_data *a)
 {
 	char	*tmp;
 	char	*prompt;
 
 	tmp = getcwd(NULL, 42);
-	prompt = ft_strjoin4(getenv("USER"), "@", ft_strrchr(tmp, '/') + 1, ":$ ");
+	prompt = ft_strjoin4(ft_getenv(a->env, "USER"), "@", ft_strrchr(tmp, '/') + 1, ":$ ");
 	free(tmp);
 	return (prompt);
 }

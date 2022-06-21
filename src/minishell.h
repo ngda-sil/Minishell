@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/20 19:19:36 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/21 03:01:03 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_data
 
 void		rl_replace_line(const char *text, int clear_undo);
 void		rl_clear_history(void);
-char		*get_prompt(void);
+char		*get_prompt(t_data *a);
 
 void		handler(int sig);
 void		init_signals(t_data *a);
@@ -169,10 +169,10 @@ void		export_builtin(t_data *a, char **args);
 
 // export utils
 
-void		add_to_new_env(t_env **lst, char *arg);
-int			is_in_new_env(t_env *lst, char *arg);
+void		add_to_env(t_env **lst, char *arg);
+int			is_in_env(t_env *lst, char *arg);
 int			check_arg_name(char *arg);
-void		replace_in_new_env(t_env *lst, char *arg);
+void		replace_in_env(t_env *lst, char *arg);
 
 // free.c
 

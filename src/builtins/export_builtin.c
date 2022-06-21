@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 23:46:36 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/20 16:53:37 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/21 03:06:12 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@ void	swap_env(t_env **p1, t_env **p2)
 	*p2 = tmp;
 }
 
-void	sort_env_list(t_env *lst, t_env *lst2)
+void	sort_env_list(t_env *lst)
 {
 	int		i;
 	int		j;
 	t_env	**p;
 	t_env	*temp_l;
-	(void)lst2;
 
 	j = -1;
 	i = env_lstsize(lst);
@@ -50,12 +49,6 @@ void	sort_env_list(t_env *lst, t_env *lst2)
 	{
 		p[j] = temp_l;
 		temp_l = temp_l->next;
-	}
-	while (j < i)
-	{
-		p[j] = temp_l;
-		temp_l = temp_l->next;
-		j++;
 	}
 	while (--i > 0)
 	{
@@ -81,7 +74,7 @@ void	export_builtin(t_data *a, char **args)
 	
 	i = 1;
 	if (!args[i])
-		sort_env_list(a->env, a->new_env);
+		sort_env_list(a->env);
 	else
 	{
 		while (args[i])
@@ -91,13 +84,13 @@ void	export_builtin(t_data *a, char **args)
 				red_flag("minishell : not a valid identifier");
 				break;
 			}
-			if (!is_in_new_env(a->new_env, args[i]))
-				replace_in_new_env(a->new_env, args[i]);
+			if (!is_in_env(a->env, args[i]))
+				replace_in_env(a->env, args[i]);
 			else
-				add_to_new_env(&a->new_env, args[i]);
+				add_to_env(&a->env, args[i]);
 			i++;
 		}
-		print_env_list((a->new_env));
+	//	print_env_list((a->env));
 	}
 }
 

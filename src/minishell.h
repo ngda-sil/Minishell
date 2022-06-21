@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/21 03:45:02 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/21 04:49:41 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ void		exit_builtin(char **args);
 void		pwd_builtin(t_data *a);
 void		env_builtin(t_data *a, char **args);
 void		export_builtin(t_data *a, char **args);
-void		unset_builtin(t_data *a, char *args);
+void		unset_builtin(t_data *a, char **args);
 
 // export utils
 
@@ -184,7 +184,7 @@ void		free_each_time(t_data *a);
 
 // free2.c
 
-void		lst_delone_env(t_env *lst);
+void		lstdelone_env(t_env *lst);
 void		lstclear_env(t_env **lst);
 void		lstdelone_quotes(t_quotes *lst);
 void		lstclear_quotes(t_quotes **lst);

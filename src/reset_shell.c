@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:25 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/20 17:34:22 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/21 03:06:29 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,12 @@ void	reset_shell(t_data *a, char **env)
 	static int	count;
 
 	if (count == 0)
+	{
 		a->env = env_into_list(env);
+		count++;
+	}
 	//free_all(a);
 	free_each_time(a);
 	rl_replace_line("", 0);
-	a->prompt = get_prompt();
+	a->prompt = get_prompt(a);
 }

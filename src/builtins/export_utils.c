@@ -6,13 +6,13 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:16:09 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/20 16:22:54 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/21 03:01:48 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	add_to_new_env(t_env **lst, char *arg)
+void	add_to_env(t_env **lst, char *arg)
 {
 	int	name_len;
 
@@ -32,7 +32,7 @@ void	add_to_new_env(t_env **lst, char *arg)
 }
 
 
-int	is_in_new_env(t_env *lst, char *arg)
+int	is_in_env(t_env *lst, char *arg)
 {
 	int	name_len;
 
@@ -70,7 +70,7 @@ int	check_arg_name(char *arg)
 	return (0);
 }
 
-void	replace_in_new_env(t_env *lst, char *arg)
+void	replace_in_env(t_env *lst, char *arg)
 {
 	int		name_len;
 	char	*tmp;

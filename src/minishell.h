@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/20 19:19:36 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/21 04:49:41 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_data
 
 void		rl_replace_line(const char *text, int clear_undo);
 void		rl_clear_history(void);
-char		*get_prompt(void);
+char		*get_prompt(t_data *a);
 
 void		handler(int sig);
 void		init_signals(t_data *a);
@@ -166,13 +166,14 @@ void		exit_builtin(char **args);
 void		pwd_builtin(t_data *a);
 void		env_builtin(t_data *a, char **args);
 void		export_builtin(t_data *a, char **args);
+void		unset_builtin(t_data *a, char **args);
 
 // export utils
 
-void		add_to_new_env(t_env **lst, char *arg);
-int			is_in_new_env(t_env *lst, char *arg);
+void		add_to_env(t_env **lst, char *arg);
+int			is_in_env(t_env *lst, char *arg);
 int			check_arg_name(char *arg);
-void		replace_in_new_env(t_env *lst, char *arg);
+void		replace_in_env(t_env *lst, char *arg);
 
 // free.c
 
@@ -183,7 +184,7 @@ void		free_each_time(t_data *a);
 
 // free2.c
 
-void		lst_delone_env(t_env *lst);
+void		lstdelone_env(t_env *lst);
 void		lstclear_env(t_env **lst);
 void		lstdelone_quotes(t_quotes *lst);
 void		lstclear_quotes(t_quotes **lst);

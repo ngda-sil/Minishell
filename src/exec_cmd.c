@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/20 19:23:47 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/06/21 03:45:23 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	exec_builtins(t_data *a, t_cmd *cmd)
 	if (!ft_strcmp(cmd->args[0], "export"))
 		export_builtin(a, cmd->args);
 	if (!ft_strcmp(cmd->args[0], "unset"))
-		echo_builtin(cmd->args);
+		unset_builtin(a, cmd->args);
 	if (!ft_strcmp(cmd->args[0], "env"))
 		env_builtin(a, cmd->args);
 }

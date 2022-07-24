@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:25 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/21 03:06:29 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/06/21 20:20:26 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	reset_shell(t_data *a, char **env)
 		count++;
 	}
 	//free_all(a);
-	free_each_time(a);
+	//free_each_time(a);
 	rl_replace_line("", 0);
 	a->prompt = get_prompt(a);
 }

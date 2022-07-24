@@ -6,13 +6,13 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:49 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/21 20:22:41 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/24 17:57:35 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*int	main2(int ac, char **av, char **env)
+int	main(int ac, char **av, char **env)
 {
 	t_data	a;
 
@@ -20,12 +20,11 @@
 	ft_bzero(&a, sizeof(t_data));
 	if (ac == 1)
 	{
-		init_signals(&a);
 		while (1)
 		{
 			reset_shell(&a, env);
 			a.line = readline(a.prompt);
-			if (!a.line)
+			if (!a.line || !ft_strncmp(a.line, "exit", 5))
 				break ;
 			if (a.line && a.line[0] != '\0')
 			{	
@@ -35,31 +34,35 @@
 				execution(&a, a.cmd, env);
 			}
 		}
+		printf("exit\n");
 		rl_clear_history();
+		tcsetattr(STDIN_FILENO, TCSAFLUSH, &a.origin);
 		free_all(&a);
 	}
 	return (0);
-}*/
-
+}
+/*
 int	main2(char *str, char **env)
 {
 	t_data	a;
 	int		i;
 
 	ft_bzero(&a, sizeof(t_data));
-	init_signals(&a);
 	i = 1;
 	while (i)
 	{
 		reset_shell(&a, env);
 		if (str)
 		{
-			a.line = str;
+			a.line = ft_strdup(str);
 			i = 0;
 		}
 		else
-			a.line = readline(a.prompt);
-		if (!a.line)
+		{
+			ft_putstr_fd(a.prompt, STDERR_FILENO);
+			a.line = readline("");
+		}
+		if (!a.line || !ft_strncmp(a.line, "exit", 5))
 			break ;
 		if (a.line && a.line[0] != '\0')
 		{	
@@ -68,9 +71,11 @@ int	main2(char *str, char **env)
 				continue ;
 			execution(&a, a.cmd, env);
 		}
-		rl_clear_history();
-		//free_all(&a);
 	}
+	//printf("exit\n");
+	rl_clear_history();
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &a.origin);
+	free_all(&a);
 	return (0);
 }
 
@@ -85,4 +90,4 @@ int	main(int argc, char **argv, char **env)
 		exit_status = main2(argv[2], env);
 		exit(exit_status);
 	}
-}
+}*/

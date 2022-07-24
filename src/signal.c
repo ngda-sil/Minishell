@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:32:52 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/20 16:45:21 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/24 17:17:04 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,8 @@ void	set_flag_echoctl(t_data *a)
 	tcsetattr(STDIN_FILENO, 0, &a->term);
 }
 
-void	init_signals(t_data *a)
+void	init_signals(void)
 {
-	set_flag_echoctl(a);
 	signal(SIGINT, handler);
 	signal(SIGQUIT, SIG_IGN);
 }

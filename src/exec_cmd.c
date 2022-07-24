@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/21 19:59:51 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/24 18:23:07 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	is_builtin(t_cmd *cmd)
 		return (1);
 	if (!ft_strcmp(cmd->args[0], "env"))
 		return (1);
+	if (!ft_strcmp(cmd->args[0], "exit"))
+		return (1);
 	return (0);
 }
 
@@ -43,6 +45,8 @@ void	exec_builtins(t_data *a, t_cmd *cmd)
 		unset_builtin(a, cmd->args);
 	if (!ft_strcmp(cmd->args[0], "env"))
 		env_builtin(a, cmd->args);
+	if (!ft_strcmp(cmd->args[0], "exit"))
+		exit_builtin(cmd->args);
 }
 
 void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
@@ -55,6 +59,11 @@ void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
 	if (cmd->pid == 0)
 	{
 		redirect(cmd, cmd->in, cmd->out);
+		if (is_builtin(cmd))
+		{
+			exec_builtins(a, cmd);
+			exit(0);
+		}
 		execve(cmd->path, cmd->args, env);
 		panic("minishell: execve failed");
 	}
@@ -73,10 +82,13 @@ void	execution(t_data *a, t_cmd *cmd, char **env)
 	{
 		set_pipe(cmd, first);
 		set_redirections(cmd);
-		if (is_builtin(cmd))
+		/*if (is_builtin(cmd))
 			exec_builtins(a, cmd);
 		else
-			exec_cmd(a, cmd, env);
+			exec_cmd(a, cmd, env);*/
+		if (!ft_strcmp(cmd->args[0], "exit"))
+			exit_builtin(cmd->args);
+		exec_cmd(a, cmd, env);
 		cmd = cmd->next;
 		first = 0;
 	}

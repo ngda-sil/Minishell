@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:21:55 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/20 19:27:08 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/27 19:15:56 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,17 @@ void	set_redirections(t_cmd *cmd)
 		if (cmd->out != 1)
 			close(cmd->out);
 		cmd->out = cmd->outfile;
+	}
+}
+
+void	close_pipes(t_cmd *cmd)
+{
+	while (cmd)
+	{
+		if (cmd->fd[0] != 1 && cmd->fd[0] != 0)
+			close(cmd->fd[0]);
+		if (cmd->fd[1] != 1 && cmd->fd[1] != 0)
+			close(cmd->fd[1]);
+		cmd = cmd->next;
 	}
 }

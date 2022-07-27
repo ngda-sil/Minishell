@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:16:09 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/21 03:01:48 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/27 20:02:32 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	add_to_env(t_env **lst, char *arg)
 		lstadd_back_env(&(*lst), lstnew_env(arg, name_len, 0));
 	}
 }
-
 
 int	is_in_env(t_env *lst, char *arg)
 {
@@ -61,7 +60,7 @@ int	check_arg_name(char *arg)
 		if (!ft_isalnum(arg[i]) && arg[i] != '=')
 		{
 			if ((arg[i] == '+' && arg[i + 1] == '='))
-				return(0);
+				return (0);
 			return (1);
 		}
 		if (arg[i] == '=')
@@ -83,7 +82,7 @@ void	replace_in_env(t_env *lst, char *arg)
 			tmp = lst->value;
 			lst->value = ft_substr(arg, name_len + 1, ft_strlen(arg));
 			free(tmp);
-			break;
+			break ;
 		}
 		if (!ft_strncmp(lst->name, arg, name_len) && (arg[name_len] == '+'))
 		{
@@ -97,9 +96,8 @@ void	replace_in_env(t_env *lst, char *arg)
 			{
 				lst->value = ft_strdup(&arg[name_len + 2]);
 			}
-			break;
+			break ;
 		}
-
 		lst = lst->next;
 	}
 }

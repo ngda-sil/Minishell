@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/24 17:17:19 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/27 20:37:37 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,11 @@ void		rl_clear_history(void);
 char		*get_prompt(t_data *a);
 
 void		handler(int sig);
+void		child_handler(int sig);
 void		init_signals(void);
 
 void		reset_shell(t_data *a, char **env);
+void		set_termios(t_data *a);
 
 void		execution(t_data *a, t_cmd *cmd, char **env);
 
@@ -117,8 +119,8 @@ int			is_dollar(t_data *a, int i);
 
 // prompt.c
 
-char    *ft_strjoin4(char const *s1, char const *s2, char const *s3,
-                        char const *s4);
+char		*ft_strjoin4(char const *s1, char const *s2, char const *s3,
+				char const *s4);
 
 // utils to use t_cmd linked list ->cmd_list.c
 
@@ -145,6 +147,10 @@ int			parse_redirection_token(t_data *a, int i);
 
 void		parse_empty_quotes(t_data *a, int i);
 int			parse_redirections(t_data *a, t_cmd *cmd);
+
+// parsing4.c
+
+int			check_cmd(t_cmd *cmd);
 
 // utils.c
 
@@ -199,5 +205,6 @@ void		check_first_arg(t_data *a, t_cmd *cmd);
 void		set_pipe(t_cmd *cmd, int first);
 void		set_redirections(t_cmd *cmd);
 void		redirect(t_cmd *cmd, int in, int out);
+void		close_pipes(t_cmd *cmd);
 
 #endif

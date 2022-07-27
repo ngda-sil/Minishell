@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 14:25:12 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/17 19:53:08 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/27 19:38:40 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	parse_args(t_data *a, int i)
 
 void	parse_pipe(t_data *a)
 {
-	// deal with fd for redirection
 	lstadd_back_cmd(&a->cmd, lstnew_cmd());
 }
 

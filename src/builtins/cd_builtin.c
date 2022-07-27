@@ -6,40 +6,46 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:30:02 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/27 19:57:12 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/27 22:40:13 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	pwd_oldpwd_swap(t_env *lst)
+static char	*get_pwd(t_env *lst)
 {
 	char	*tmp;
-	t_env	*tmp_l;
-	char	*old_pwd;
 
-	tmp_l = lst;
 	while (lst)
 	{
-		if (!ft_strncmp(lst->name, "PWD", 3))
+		if (!strncmp(lst->name, "PWD", 3))
 		{
 			tmp = lst->value;
 			lst->value = ft_strdup(getcwd(NULL, 42));
-			break ;
+			return (tmp);
 		}
 		lst = lst->next;
 	}
-	while (tmp_l)
+	return (NULL);
+}
+
+void	pwd_oldpwd_swap(t_env *lst)
+{
+	char	*tmp;
+	char	*old_pwd;
+
+	tmp = get_pwd(lst);
+	while (lst)
 	{
-		if (!ft_strncmp(tmp_l->name, "OLDPWD", 6))
+		if (!ft_strncmp(lst->name, "OLDPWD", 6))
 		{
-			old_pwd = tmp_l->value;
-			tmp_l->value = ft_strdup(tmp);
+			old_pwd = lst->value;
+			lst->value = ft_strdup(tmp);
 			free (tmp);
 			free (old_pwd);
 			break ;
 		}
-		tmp_l = tmp_l->next;
+		lst = lst->next;
 	}
 }
 

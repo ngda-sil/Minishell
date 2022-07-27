@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:08:01 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/27 17:05:22 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/27 21:59:50 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,4 @@ char	*ft_getenv(t_env *lst, char *name)
 		lst = lst->next;
 	}
 	return (NULL);
-}
-
-void	print_env_list(t_env *lst)
-{
-	while (lst)
-	{
-		printf("Name:%s, value:(%s)\n", lst->name, lst->value);
-		lst = lst->next;
-	}
 }

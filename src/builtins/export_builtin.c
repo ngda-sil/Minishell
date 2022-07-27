@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 23:46:36 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/27 19:59:53 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/27 23:22:30 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,20 @@ void	swap_env(t_env **p1, t_env **p2)
 	*p2 = tmp;
 }
 
+void	print_export(t_env **p)
+{
+	int	i;
+
+	i = -1;
+	while (p[++i])
+	{
+		if (p[i]->value)
+			printf("declare -x %s=\"%s\"\n", p[i]->name, p[i]->value);
+		else
+			printf("declare -x %s\n", p[i]->name);
+	}
+}
+
 void	sort_env_list(t_env *lst)
 {
 	int		i;
@@ -54,20 +68,11 @@ void	sort_env_list(t_env *lst)
 	{
 		j = -1;
 		while (++j < i - 1)
-		{
 			if (ft_strcmp(p[j]->name, p[j + 1]->name) > 0)
 				swap_env(&p[j], &p[j + 1]);
-		}
 		i--;
 	}
-	j = -1;
-	while (p[++j])
-	{
-		if (p[j]->value)
-			printf("declare -x %s=\"%s\"\n", p[j]->name, p[j]->value);
-		else
-			printf("declare -x %s\n", p[j]->name);
-	}
+	print_export(p);
 	free(p);
 }
 

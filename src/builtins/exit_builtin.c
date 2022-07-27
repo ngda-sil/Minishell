@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:18:49 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/27 19:59:03 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/27 23:14:18 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void	exit_builtin(char **args)
 		printf("exit\n");
 		exit (0);
 	}
-	if (is_num(args[1]) || LLONG_MAX <= ft_atoll(args[1]) || LLONG_MIN >= ft_atoll(args[1]))
+	if (is_num(args[1]) || LLONG_MAX <= ft_atoll(args[1])
+		|| LLONG_MIN >= ft_atoll(args[1]))
 	{
 		red_flag(ft_strjoin4("exit\nminishell: exit : ", args[1], ": ",
 				"numeric argument required"));

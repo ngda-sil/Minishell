@@ -6,22 +6,11 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:46:17 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/20 19:29:48 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/27 22:08:54 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	parse_empty_quotes(t_data *a, int i)
-{
-	if (is_special_char(a, i + 2))
-	{
-		if (i == 0)
-			add_token(a, ft_strdup(""));
-		else if (is_special_char(a, i - 1))
-			add_token(a, ft_strdup(""));
-	}
-}
 
 void	delete_redirection(t_list *lst)
 {

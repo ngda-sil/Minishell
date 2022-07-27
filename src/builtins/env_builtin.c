@@ -6,13 +6,13 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:53:54 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/27 17:48:16 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/27 21:58:40 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	print_env_list2(t_env *lst)
+void	print_env_list(t_env *lst)
 {
 	while (lst)
 	{
@@ -25,7 +25,7 @@ void	print_env_list2(t_env *lst)
 void	env_builtin(t_data *a, char **args)
 {
 	if (!args[1])
-		print_env_list2(a->env);
+		print_env_list(a->env);
 	else
 		red_flag("Votre shell doit implémenter les builtins suivantes : env \
 				SANS aucune option NI argument. cf sujet p.5");

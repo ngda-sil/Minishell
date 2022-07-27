@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/24 18:23:07 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/27 20:59:38 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
 {
 	int	status;
 
+	signal(SIGINT, &child_handler);
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 		panic("minishell: fork failed");
@@ -82,14 +83,12 @@ void	execution(t_data *a, t_cmd *cmd, char **env)
 	{
 		set_pipe(cmd, first);
 		set_redirections(cmd);
-		/*if (is_builtin(cmd))
-			exec_builtins(a, cmd);
-		else
-			exec_cmd(a, cmd, env);*/
 		if (!ft_strcmp(cmd->args[0], "exit"))
 			exit_builtin(cmd->args);
-		exec_cmd(a, cmd, env);
+		else
+			exec_cmd(a, cmd, env);
 		cmd = cmd->next;
 		first = 0;
 	}
+	close_pipes(a->cmd);
 }

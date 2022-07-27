@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:30:02 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/21 03:31:03 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/27 19:57:12 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	pwd_oldpwd_swap(t_env *lst)
 	{
 		if (!ft_strncmp(lst->name, "PWD", 3))
 		{
-			tmp	= lst->value;
+			tmp = lst->value;
 			lst->value = ft_strdup(getcwd(NULL, 42));
-			break;
+			break ;
 		}
 		lst = lst->next;
 	}
@@ -37,7 +37,7 @@ void	pwd_oldpwd_swap(t_env *lst)
 			tmp_l->value = ft_strdup(tmp);
 			free (tmp);
 			free (old_pwd);
-			break;
+			break ;
 		}
 		tmp_l = tmp_l->next;
 	}
@@ -50,7 +50,8 @@ void	cd_builtin(t_data *a, char **args)
 		if (!chdir(args[1]))
 			pwd_oldpwd_swap(a->env);
 		else
-			red_flag(ft_strjoin4("minishell: cd : ", args[1], ": ",strerror(errno)));
+			red_flag(ft_strjoin4("minishell: cd : ", args[1],
+					": ", strerror(errno)));
 	}
 	else
 	{
@@ -60,6 +61,3 @@ void	cd_builtin(t_data *a, char **args)
 			red_flag("Problem with chdir going to $HOME\n");
 	}
 }
-
-// echo $OLDPWD $PWD ; cd / ; echo $OLDPWD $PWD 
-// a gerer exec_test 'mkdir test_dir ; cd test_dir ; rm -rf ../test_dir ; cd . ; pwd ; cd . ; pwd ; cd .. ; pwd'

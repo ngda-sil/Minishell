@@ -1,52 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   parsing4.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/14 11:09:10 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/27 19:55:34 by ngda-sil         ###   ########.fr       */
+/*   Created: 2022/07/27 20:05:12 by ngda-sil          #+#    #+#             */
+/*   Updated: 2022/07/27 20:19:58 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-int	is_only_n(char *str)
+int	check_cmd(t_cmd *cmd)
 {
-	int	i;
-
-	i = 0;
-	if (str[i] != '-')
-		return (1);
-	while (str[++i])
+	while (cmd)
 	{
-		if (str[i] != 'n')
+		if (cmd->args[0] == NULL)
+		{
+			red_flag("minishell: syntax error near unexpected token 'pipe'");
 			return (1);
+		}
+		cmd = cmd->next;
 	}
 	return (0);
 }
-
-void	echo_builtin(char **args)
-{	
-	int	i;
-	int	n;
-
-	i = 0;
-	n = 0;
-	if (args[1] && !is_only_n(args[1]))
-	{
-		n++;
-		while (!is_only_n(args[i + 1]))
-			i++;
-	}
-	while (args[++i])
-	{
-		ft_putstr_fd(args[i], 1);
-		if (args[i + 1])
-			write(1, " ", 1);
-	}
-	if (!n)
-		write(1, "\n", 1);
-}
-

@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:16:09 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/27 20:02:32 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/27 23:13:12 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	is_in_env(t_env *lst, char *arg)
 	while (lst)
 	{
 		name_len = ft_strlen(lst->name);
-		if (!ft_strncmp(lst->name, arg, name_len) && (!arg[name_len] || (arg[name_len] == '=' || arg[name_len] == '+')))
+		if (!ft_strncmp(lst->name, arg, name_len) && (!arg[name_len]
+				|| (arg[name_len] == '=' || arg[name_len] == '+')))
 			return (0);
 		lst = lst->next;
 	}
@@ -69,6 +70,22 @@ int	check_arg_name(char *arg)
 	return (0);
 }
 
+void	add_to_value(char **value, char *start)
+{
+	char	*tmp;
+
+	if (*value)
+	{
+		tmp = *value;
+		*value = ft_strjoin(tmp, start);
+		free(tmp);
+	}
+	else
+	{
+		*value = ft_strdup(start);
+	}
+}
+
 void	replace_in_env(t_env *lst, char *arg)
 {
 	int		name_len;
@@ -86,16 +103,7 @@ void	replace_in_env(t_env *lst, char *arg)
 		}
 		if (!ft_strncmp(lst->name, arg, name_len) && (arg[name_len] == '+'))
 		{
-			if (lst->value)
-			{
-				tmp = lst->value;
-				lst->value = ft_strjoin(tmp, &arg[name_len + 2]);
-				free(tmp);
-			}
-			else
-			{
-				lst->value = ft_strdup(&arg[name_len + 2]);
-			}
+			add_to_value(&lst->value, &arg[name_len + 2]);
 			break ;
 		}
 		lst = lst->next;

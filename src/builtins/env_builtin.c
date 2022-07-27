@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 11:53:54 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/21 03:31:19 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/27 17:48:16 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	print_env_list2(t_env *lst)
 {
 	while (lst)
 	{
-		printf("%s=%s\n", lst->name, lst->value);
+		if (lst->value)
+			printf("%s=%s\n", lst->name, lst->value);
 		lst = lst->next;
 	}
 }

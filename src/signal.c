@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:32:52 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/24 17:17:04 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/27 20:47:41 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	handler(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 	}
+}
+
+void	child_handler(int sig)
+{
+	(void)sig;
 }
 
 void	set_flag_echoctl(t_data *a)

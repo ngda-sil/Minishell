@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 03:43:43 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/21 04:57:49 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/27 20:03:45 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	unset_builtin(t_data *a, char **args)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 	t_env	*previous;
 	int		i;
 
@@ -28,7 +28,7 @@ void	unset_builtin(t_data *a, char **args)
 			{
 				a->env = previous->next;
 				lstdelone_env(previous);
-				break;
+				break ;
 			}
 		}
 		tmp = previous->next;
@@ -40,7 +40,7 @@ void	unset_builtin(t_data *a, char **args)
 				{
 					previous->next = tmp->next;
 					lstdelone_env(tmp);
-					break;
+					break ;
 				}
 			}
 			previous = tmp;

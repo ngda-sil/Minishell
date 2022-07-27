@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 23:46:36 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/21 03:48:01 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/27 19:59:53 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	sort_env_list(t_env *lst)
 void	export_builtin(t_data *a, char **args)
 {
 	int		i;
-	
+
 	i = 1;
 	if (!args[i])
 		sort_env_list(a->env);
@@ -85,7 +85,7 @@ void	export_builtin(t_data *a, char **args)
 			if (check_arg_name(args[i]))
 			{
 				red_flag("minishell : not a valid identifier");
-				break;
+				break ;
 			}
 			if (!is_in_env(a->env, args[i]))
 				replace_in_env(a->env, args[i]);
@@ -95,6 +95,3 @@ void	export_builtin(t_data *a, char **args)
 		}
 	}
 }
-
-
-//export TEST="ls       -l     - a" ; echo $TEST ; $LS

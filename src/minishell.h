@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/06/21 04:49:41 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/24 17:17:19 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_data
 	char			*prompt;
 	char			*buffer;
 	int				len;
+	struct termios	origin;
 	struct termios	term;
 	int				last_ret;
 }					t_data;
@@ -82,7 +83,7 @@ void		rl_clear_history(void);
 char		*get_prompt(t_data *a);
 
 void		handler(int sig);
-void		init_signals(t_data *a);
+void		init_signals(void);
 
 void		reset_shell(t_data *a, char **env);
 

@@ -6,7 +6,7 @@
 #    By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 19:44:57 by ngda-sil          #+#    #+#              #
-#    Updated: 2022/06/21 03:48:56 by ngda-sil         ###   ########.fr        #
+#    Updated: 2022/07/24 14:46:38 by amuhleth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,11 +55,13 @@ FILES 		= main.c 					\
 			  builtins/exit_builtin.c	\
 			  builtins/export_builtin.c	\
 			  builtins/export_utils.c	\
-			 builtins/unset_builtin.c	\
+			  builtins/unset_builtin.c	\
 
 # =============================================================================
 
-all : $(OBJ)
+all :	$(NAME)
+
+$(NAME) :	$(OBJ)
 	$(MAKE) -C $(LFTDIR)
 	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(RL_DIR) $(RL_LIB) -o $(NAME)
 

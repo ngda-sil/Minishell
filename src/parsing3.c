@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:46:17 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 14:44:22 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 20:01:38 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ t_list	*parse_infile(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 		*check = 1;
 		return (lst);
 	}
+	if (check_file_redirection(a, lst->next->content, check))
+		return (lst);
 	file = lst->next->content;
 	cmd->infile = open(file, O_RDONLY);
 	if (cmd->infile == -1)
@@ -71,6 +73,8 @@ t_list	*parse_outfile_trunc(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 		*check = 1;
 		return (lst);
 	}
+	if (check_file_redirection(a, lst->next->content, check))
+		return (lst);
 	file = lst->next->content;
 	cmd->outfile = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (cmd->outfile == -1)
@@ -90,6 +94,8 @@ t_list	*parse_outfile_append(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 		*check = 1;
 		return (lst);
 	}
+	if (check_file_redirection(a, lst->next->content, check))
+		return (lst);
 	file = lst->next->content;
 	cmd->outfile = open(file, O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (cmd->outfile == -1)
@@ -102,7 +108,6 @@ int	parse_redirections(t_data *a, t_cmd *cmd)
 	t_list	*lst;
 	int		check;
 
-	(void)a;
 	check = 0;
 	while (cmd)
 	{

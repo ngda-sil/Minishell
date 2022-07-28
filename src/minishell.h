@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 18:22:35 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/28 19:57:38 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ t_list		*parse_heredoc(t_data *a, t_cmd *cmd, t_list *lst, int *check);
 
 void		parse_empty_quotes(t_data *a, int i);
 int			check_cmd(t_cmd *cmd);
+int			check_file_redirection(t_data *a, char *file, int *check);
 
 // parsing4.c
 

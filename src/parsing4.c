@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 20:05:12 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/27 22:09:58 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 20:00:49 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,25 @@ int	check_cmd(t_cmd *cmd)
 		cmd = cmd->next;
 	}
 	return (0);
+}
+
+int	check_file_redirection(t_data *a, char *file, int *check)
+{
+	if (!ft_strncmp(file, ">", 2))
+		red_flag("minishell: syntax error near unexpected token '>'");
+	else if (!ft_strncmp(file, ">>", 3))
+		red_flag("minishell: syntax error near unexpected token '>>'");
+	else if (!ft_strncmp(file, "<", 2))
+		red_flag("minishell: syntax error near unexpected token '<'");
+	else if (!ft_strncmp(file, "<<", 3))
+		red_flag("minishell: syntax error near unexpected token '<<'");
+	if (!ft_strncmp(file, ">", 2) || !ft_strncmp(file, ">>", 3)
+		|| !ft_strncmp(file, "<", 2) || !ft_strncmp(file, "<<", 3))
+	{
+		a->last_ret = 258;
+		*check = 1;
+		return (1);
+	}
+	else
+		return (0);
 }

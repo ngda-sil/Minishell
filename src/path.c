@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:51:18 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 14:25:23 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 14:43:55 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**get_dirs(t_data *a)
 	env_path = ft_getenv(a->env, "PATH");
 	if (env_path)
 		dirs = ft_split(env_path, ':');
-	else 
+	else
 		return (NULL);
 	i = 0;
 	while (dirs[i] != NULL)

@@ -6,11 +6,13 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:49 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 16:52:20 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 20:04:33 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_status;
 
 int	main(int ac, char **av, char **env)
 {

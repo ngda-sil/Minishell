@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:13:17 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/17 18:14:24 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/28 19:54:44 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	get_quotes_data(t_data *a, int i, char type)
 	if (!a->line[i])
 	{
 		red_flag("minishell: syntax error near unexpected token 'quote'");
-		a->last_ret = 258;
+		g_status = 258;
 		return (-1);
 	}
 	if (a->line[i] == type)

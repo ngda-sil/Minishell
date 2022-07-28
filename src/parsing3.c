@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:46:17 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 14:44:22 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 19:57:26 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ t_list	*delete_redirection(t_cmd *cmd, t_list *lst)
 
 t_list	*parse_infile(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 {
+	(void)a;
 	char	*file;
 
 	if (!lst->next)
 	{
 		red_flag("minishell: syntax error near unexpected token 'newline'");
-		a->last_ret = 258;
+		g_status = 258;
 		*check = 1;
 		return (lst);
 	}
@@ -53,7 +54,7 @@ t_list	*parse_infile(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 	if (cmd->infile == -1)
 	{
 		red_flag("minishell: No such file or directory");
-		a->last_ret = 1;
+		g_status = 1;
 		*check = 1;
 		return (lst);
 	}
@@ -62,12 +63,13 @@ t_list	*parse_infile(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 
 t_list	*parse_outfile_trunc(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 {
+	(void)a;
 	char	*file;
 
 	if (!lst->next)
 	{
 		red_flag("minishell: syntax error near unexpected token 'newline'");
-		a->last_ret = 258;
+		g_status = 258;
 		*check = 1;
 		return (lst);
 	}
@@ -80,13 +82,14 @@ t_list	*parse_outfile_trunc(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 
 t_list	*parse_outfile_append(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 {
+	(void)a;
 	char	*file;
 
 	(void)cmd;
 	if (!lst->next)
 	{
 		red_flag("minishell: syntax error near unexpected token 'newline'");
-		a->last_ret = 258;
+		g_status = 258;
 		*check = 1;
 		return (lst);
 	}

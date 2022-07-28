@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 18:22:35 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/28 20:03:01 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_cmd	t_cmd;
 typedef struct s_env	t_env;
 typedef struct s_quotes	t_quotes;
 
+extern int	g_status;
 typedef struct s_cmd
 {
 	t_list	*tokens;
@@ -75,7 +76,6 @@ typedef struct s_data
 	int				len;
 	struct termios	origin;
 	struct termios	term;
-	int				last_ret;
 }					t_data;
 
 void		rl_replace_line(const char *text, int clear_undo);

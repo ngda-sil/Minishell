@@ -56,10 +56,11 @@ int	handle_heredoc(char *limiter)
 
 t_list	*parse_heredoc(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 {
+	(void)a;
 	if (!lst->next)
 	{
 		red_flag("minishell: syntax error near unexpected token 'newline'");
-		a->last_ret = 258;
+		g_status = 258;
 		*check = 1;
 		return (lst);
 	}

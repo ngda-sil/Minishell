@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 16:37:46 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/21 04:54:44 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 19:52:28 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	dollar_last_return(t_data *a, int i)
 	new.type = '?';
 	a->line[i - 1] = '\0';
 	new.stop = i;
-	new.p = ft_itoa(a->last_ret);
+	new.p = ft_itoa(g_status);
 	if (!new.p)
 		panic("minishell: malloc failed");
 	lstadd_back_quotes(&a->quotes, lstnew_quotes(&new));

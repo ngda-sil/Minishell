@@ -33,6 +33,7 @@ typedef struct s_cmd	t_cmd;
 typedef struct s_env	t_env;
 typedef struct s_quotes	t_quotes;
 
+extern int	g_status;
 typedef struct s_cmd
 {
 	t_list	*tokens;
@@ -75,7 +76,6 @@ typedef struct s_data
 	int				len;
 	struct termios	origin;
 	struct termios	term;
-	int				last_ret;
 }					t_data;
 
 void		rl_replace_line(const char *text, int clear_undo);
@@ -157,11 +157,6 @@ t_list		*parse_heredoc(t_data *a, t_cmd *cmd, t_list *lst, int *check);
 void		parse_empty_quotes(t_data *a, int i);
 int			check_cmd(t_cmd *cmd);
 int			check_file_redirection(t_data *a, char *file, int *check);
-
-// parsing4.c
-
-void		parse_empty_quotes(t_data *a, int i);
-int			check_cmd(t_cmd *cmd);
 
 // utils.c
 

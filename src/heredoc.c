@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 17:02:34 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 19:57:46 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 19:56:50 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ t_list	*parse_heredoc(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 		*check = 1;
 		return (lst);
 	}
+	if (check_file_redirection(a, lst->next->content, check))
+		return (lst);
 	cmd->infile = handle_heredoc(lst->next->content);
 	if (cmd->infile == -1)
 		panic("minishell: heredoc failed");

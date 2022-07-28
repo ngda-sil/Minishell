@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:32:52 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/27 20:47:41 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:07:40 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	handler(int sig)
 void	child_handler(int sig)
 {
 	(void)sig;
+	printf("\n");
 }
 
 void	set_flag_echoctl(t_data *a)

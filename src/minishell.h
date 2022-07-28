@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/27 22:10:00 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 18:22:35 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ void		init_signals(void);
 void		reset_shell(t_data *a, char **env);
 void		set_termios(t_data *a);
 
+// exec_cmd.c (execution)
+
 void		execution(t_data *a, t_cmd *cmd, char **env);
+void		exec_builtins(t_data *a, t_cmd *cmd);
 
 // env_into_list.c
 
@@ -212,6 +215,7 @@ void		check_first_arg(t_data *a, t_cmd *cmd);
 void		set_pipe(t_cmd *cmd, int first);
 void		set_redirections(t_cmd *cmd);
 void		redirect(t_cmd *cmd, int in, int out);
+void		redirect_and_exec_builtins(t_data *a, t_cmd *cmd);
 void		close_pipes(t_cmd *cmd);
 
 #endif

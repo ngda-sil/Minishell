@@ -6,44 +6,58 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 03:43:43 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/27 23:23:08 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 19:48:06 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+static int	check_first_elem(t_env *prev, char *arg, t_data *a)
+{
+	if (ft_strlen(prev->name) == ft_strlen(arg))
+	{
+		if (!ft_strncmp(prev->name, arg, ft_strlen(prev->name)))
+		{
+			a->env = prev->next;
+			lstdelone_env(prev);
+			return (1);
+		}
+	}
+	return (0);
+}
+
+static int	check_all_elem(t_env *tmp, t_env *prev, char *arg)
+{
+	if (ft_strlen(tmp->name) == ft_strlen(arg))
+	{
+		if (!ft_strncmp(tmp->name, arg, ft_strlen(tmp->name)))
+		{
+			prev->next = tmp->next;
+			lstdelone_env(tmp);
+			return (1);
+		}
+	}
+	return (0);
+}
+
 void	unset_builtin(t_data *a, char **args)
 {
 	t_env	*tmp;
-	t_env	*previous;
+	t_env	*prev;
 	int		i;
 
 	i = 0;
 	while (args[++i])
 	{
-		previous = a->env;
-		if (ft_strlen(previous->name) == ft_strlen(args[i]))
-		{
-			if (!ft_strncmp(previous->name, args[i], ft_strlen(previous->name)))
-			{
-				a->env = previous->next;
-				lstdelone_env(previous);
-				break ;
-			}
-		}
-		tmp = previous->next;
+		prev = a->env;
+		if (check_first_elem(prev, args[i], a))
+			break ;
+		tmp = prev->next;
 		while (tmp)
 		{
-			if (ft_strlen(tmp->name) == ft_strlen(args[i]))
-			{
-				if (!ft_strncmp(tmp->name, args[i], ft_strlen(tmp->name)))
-				{
-					previous->next = tmp->next;
-					lstdelone_env(tmp);
-					break ;
-				}
-			}
-			previous = tmp;
+			if (check_all_elem(tmp, prev, args[i]))
+				break ;
+			prev = tmp;
 			tmp = tmp->next;
 		}
 	}

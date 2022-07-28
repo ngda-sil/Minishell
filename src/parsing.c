@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:07:05 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/27 20:13:21 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/27 22:07:27 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	parsing(t_data *a)
 		return (1);
 	tokens_to_args(a->cmd);
 	if (a->cmd->args[0] == NULL && a->cmd->next == NULL)
-	   return (1);
+		return (1);
 	else if (check_cmd(a->cmd))
 		return (1);
 	check_first_arg(a, a->cmd);

@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:34:44 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/27 16:59:27 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/27 22:11:26 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*get_prompt(t_data *a)
 		user = ft_strdup("");
 		i++;
 	}
-	prompt = ft_strjoin4(user , "@", ft_strrchr(tmp, '/') + 1, ":$ ");
+	prompt = ft_strjoin4(user, "@", ft_strrchr(tmp, '/') + 1, ":$ ");
 	free(tmp);
 	if (i)
 		free(user);

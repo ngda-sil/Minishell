@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:21:55 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 14:42:57 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 18:25:43 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,26 @@
 
 void	redirect(t_cmd *cmd, int in, int out)
 {
-	(void)cmd;
 	dup2(in, 0);
 	dup2(out, 1);
-	/*if (in != 0)
+	if (in != 0 && in != 1)
 		close(in);
-	if (out != 1)
-		close(out);*/
+	if (out != 0 && out != 1)
+		close(out);
+	close_pipes(cmd);
+}
+
+void	redirect_and_exec_builtins(t_data *a, t_cmd *cmd)
+{
+	int	stdi;
+	int	stdo;
+
+	set_redirections(cmd);
+	stdi = dup(STDIN_FILENO);
+	stdo = dup(STDOUT_FILENO);
+	redirect(a->cmd, cmd->in, cmd->out);
+	exec_builtins(a, cmd);
+	redirect(a->cmd, stdi, stdo);
 }
 
 void	set_pipe(t_cmd *cmd, int first)

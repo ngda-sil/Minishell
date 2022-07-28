@@ -19,12 +19,12 @@ LFTDIR 		= ./Libft
 LIBFT		= $(LFTDIR)/libft.a
 
 # to compile on Intel Macs (x86)
-RL_DIR		= -I ~/.brew/Cellar/readline/8.1.2/include
-RL_LIB   	= -lreadline -L ~/.brew/Cellar/readline/8.1.2/lib
+#RL_DIR		= -I ~/.brew/Cellar/readline/8.1.2/include
+#RL_LIB   	= -lreadline -L ~/.brew/Cellar/readline/8.1.2/lib
 
 # to compile on M1 Macs (arm)
-#RL_DIR		= -I /opt/homebrew/Cellar/readline/8.1.2/include
-#RL_LIB		= -lreadline -L/opt/homebrew/Cellar/readline/8.1.2/lib
+RL_DIR		= -I /opt/homebrew/Cellar/readline/8.1.2/include
+RL_LIB		= -lreadline -L/opt/homebrew/Cellar/readline/8.1.2/lib
 
 SRC_PATH 	= ./src/
 SRC 		= $(addprefix $(SRC_PATH), $(FILES))
@@ -37,6 +37,7 @@ FILES 		= main.c 					\
 			  parsing2.c				\
 			  parsing3.c				\
 			  parsing4.c				\
+			  heredoc.c					\
 			  quotes.c					\
 			  quotes_list.c				\
 			  reset_shell.c				\

@@ -12,73 +12,89 @@
 
 #include "minishell.h"
 
-void	delete_redirection(t_list *lst)
+t_list	*delete_redirection(t_cmd *cmd, t_list *lst)
 {
 	t_list	*tmp;
+	t_list	*ptr;
 
-	tmp = lst->next->next->next;
-	ft_lstdelone(lst->next->next, &free);
-	ft_lstdelone(lst->next, &free);
-	lst->next = tmp;
+	if (lst == cmd->tokens)
+	{
+		cmd->tokens = lst->next->next;
+		ft_lstdelone(lst->next, &free);
+		ft_lstdelone(lst, &free);
+		return (cmd->tokens);
+	}
+	else
+	{
+		ptr = cmd->tokens;
+		while (ptr->next != lst)
+			ptr = ptr->next;
+		tmp = ptr->next->next->next;
+		ft_lstdelone(ptr->next->next, &free);
+		ft_lstdelone(ptr->next, &free);
+		ptr->next = tmp;
+		return (ptr->next);
+	}
 }
 
-int	parse_infile(t_data *a, t_cmd *cmd, t_list *lst)
+t_list	*parse_infile(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 {
 	char	*file;
 
-	if (!lst->next->next)
+	if (!lst->next)
 	{
 		red_flag("minishell: syntax error near unexpected token 'newline'");
 		a->last_ret = 258;
-		return (1);
+		*check = 1;
+		return (lst);
 	}
-	file = lst->next->next->content;
+	file = lst->next->content;
 	cmd->infile = open(file, O_RDONLY);
 	if (cmd->infile == -1)
 	{
 		red_flag("minishell: No such file or directory");
 		a->last_ret = 1;
-		return (1);
+		*check = 1;
+		return (lst);
 	}
-	delete_redirection(lst);
-	return (0);
+	return (delete_redirection(cmd, lst));
 }
 
-int	parse_outfile_trunc(t_data *a, t_cmd *cmd, t_list *lst)
+t_list	*parse_outfile_trunc(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 {
 	char	*file;
 
-	if (!lst->next->next)
+	if (!lst->next)
 	{
 		red_flag("minishell: syntax error near unexpected token 'newline'");
 		a->last_ret = 258;
-		return (1);
+		*check = 1;
+		return (lst);
 	}
-	file = lst->next->next->content;
+	file = lst->next->content;
 	cmd->outfile = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (cmd->outfile == -1)
 		panic("minishell: open failed");
-	delete_redirection(lst);
-	return (0);
+	return (delete_redirection(cmd, lst));
 }
 
-int	parse_outfile_append(t_data *a, t_cmd *cmd, t_list *lst)
+t_list	*parse_outfile_append(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 {
 	char	*file;
 
 	(void)cmd;
-	if (!lst->next->next)
+	if (!lst->next)
 	{
 		red_flag("minishell: syntax error near unexpected token 'newline'");
 		a->last_ret = 258;
-		return (1);
+		*check = 1;
+		return (lst);
 	}
-	file = lst->next->next->content;
+	file = lst->next->content;
 	cmd->outfile = open(file, O_RDWR | O_CREAT | O_APPEND, 0644);
 	if (cmd->outfile == -1)
 		panic("minishell: open failed");
-	delete_redirection(lst);
-	return (0);
+	return (delete_redirection(cmd, lst));
 }
 
 int	parse_redirections(t_data *a, t_cmd *cmd)
@@ -91,14 +107,16 @@ int	parse_redirections(t_data *a, t_cmd *cmd)
 	while (cmd)
 	{
 		lst = cmd->tokens;
-		while (lst && lst->next)
+		while (lst)
 		{
-			if (!ft_strncmp(lst->next->content, ">", 2))
-				check = parse_outfile_trunc(a, cmd, lst);
-			else if (!ft_strncmp(lst->next->content, ">>", 3))
-				check = parse_outfile_append(a, cmd, lst);
-			else if (!ft_strncmp(lst->next->content, "<", 2))
-				check = parse_infile(a, cmd, lst);
+			if (!ft_strncmp(lst->content, ">", 2))
+				lst = parse_outfile_trunc(a, cmd, lst, &check);
+			else if (!ft_strncmp(lst->content, ">>", 3))
+				lst = parse_outfile_append(a, cmd, lst, &check);
+			else if (!ft_strncmp(lst->content, "<", 2))
+				lst = parse_infile(a, cmd, lst, &check);
+			else if (!ft_strncmp(lst->content, "<<", 3))
+				lst = parse_heredoc(a, cmd, lst, &check);
 			else
 				lst = lst->next;
 			if (check == 1)

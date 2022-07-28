@@ -145,6 +145,14 @@ int			parse_redirection_token(t_data *a, int i);
 // parsing3.c
 
 int			parse_redirections(t_data *a, t_cmd *cmd);
+t_list		*delete_redirection(t_cmd *cmd, t_list *lst);
+
+t_list		*parse_heredoc(t_data *a, t_cmd *cmd, t_list *lst, int *check);
+
+// parsing4.c
+
+void		parse_empty_quotes(t_data *a, int i);
+int			check_cmd(t_cmd *cmd);
 
 // parsing4.c
 

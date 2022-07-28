@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:25 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 13:07:38 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:06:30 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	reset_shell(t_data *a, char **env)
 	if (!count)
 	{
 		a->env = env_into_list(env);
-		set_termios(a);
 		count++;
 	}
+	set_termios(a);
 	init_signals();
 	free_each_time(a);
 	rl_replace_line("", 0);

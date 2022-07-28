@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 14:04:17 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 17:10:46 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	exec_builtins(t_data *a, t_cmd *cmd)
 void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
 {
 	signal(SIGINT, &child_handler);
+	tcsetattr(STDIN_FILENO, TCSANOW, &a->origin);
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 		panic("minishell: fork failed");
@@ -87,17 +88,17 @@ void	execution(t_data *a, t_cmd *cmd, char **env)
 	int		first;
 	
 	first = 1;
-	while (cmd)
-	{
-		set_pipe(cmd, first);
-		set_redirections(cmd);
-		if (!cmd->next && is_builtin(cmd))
-			exec_builtins(a, cmd);
-		else
+	if (!cmd->next && is_builtin(cmd))
+		exec_builtins(a, cmd);
+	else
+		while (cmd)
+		{
+			set_pipe(cmd, first);
+			set_redirections(cmd);
 			exec_cmd(a, cmd, env);
-		cmd = cmd->next;
-		first = 0;
-	}
+			cmd = cmd->next;
+			first = 0;
+		}
 	wait_for_child(a, a->cmd);
 	close_pipes(a->cmd);
 }

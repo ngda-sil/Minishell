@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:18:49 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/27 23:14:18 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 16:39:06 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ void	exit_builtin(char **args)
 	long long		status;
 
 	if (!args[1])
-	{
-		printf("exit\n");
 		exit (0);
-	}
 	if (is_num(args[1]) || LLONG_MAX <= ft_atoll(args[1])
 		|| LLONG_MIN >= ft_atoll(args[1]))
 	{
@@ -64,10 +61,7 @@ void	exit_builtin(char **args)
 	if (!args[2])
 	{
 		status = ft_atoll(args[1]);
-		{
-			ft_putstr_fd("exit\n", 2);
 			exit(status % 256);
-		}
 	}
 	else
 		red_flag("minishell: exit: too many arguments");

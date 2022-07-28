@@ -6,7 +6,7 @@
 #    By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 19:44:57 by ngda-sil          #+#    #+#              #
-#    Updated: 2022/07/28 14:41:43 by ngda-sil         ###   ########.fr        #
+#    Updated: 2022/07/28 19:07:28 by amuhleth         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 
 NAME		= minishell
 CC			= gcc
-CFLAGS 		= -g3 -Wall -Wextra -Werror
+CFLAGS 		= -g3 -Wall -Wextra -Werror -fsanitize=address
 LFTDIR 		= ./Libft
 LIBFT		= $(LFTDIR)/libft.a
 

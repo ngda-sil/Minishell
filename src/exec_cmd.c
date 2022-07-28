@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 18:23:42 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/28 19:09:11 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
 
 void	wait_for_child(t_data *a, t_cmd *cmd)
 {
-	int status;
+	int	status;
 
 	while (cmd)
 	{
@@ -86,7 +86,7 @@ void	wait_for_child(t_data *a, t_cmd *cmd)
 void	execution(t_data *a, t_cmd *cmd, char **env)
 {
 	int		first;
-	
+
 	first = 1;
 	if (!cmd->next && is_builtin(cmd))
 		redirect_and_exec_builtins(a, cmd);

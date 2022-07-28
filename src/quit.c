@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:21:16 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/06/19 22:27:59 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 21:27:18 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,12 @@ void	panic(char *message)
 {
 	red_flag(message);
 	exit(EXIT_FAILURE);
+}
+
+void	goodbye(t_data *a)
+{
+	printf("exit\n");
+	rl_clear_history();
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &a.origin);
+	free_all(&a);
 }

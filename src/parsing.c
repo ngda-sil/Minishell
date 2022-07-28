@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:07:05 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 20:25:15 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/28 21:22:38 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,5 @@ int	parsing(t_data *a)
 	else if (check_cmd(a->cmd))
 		return (1);
 	check_first_arg(a, a->cmd);
-	//print_cmd_tokens(a->cmd);
-	//print_cmd_args(a->cmd);
 	return (0);
 }

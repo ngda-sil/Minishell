@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 20:26:55 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/28 21:27:16 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_cmd	t_cmd;
 typedef struct s_env	t_env;
 typedef struct s_quotes	t_quotes;
 
-extern int	g_status;
+extern int				g_status;
 typedef struct s_cmd
 {
 	t_list	*tokens;
@@ -170,7 +170,7 @@ char		*join_2(char *s1, char *s2);
 
 void		panic(char *message);
 void		red_flag(char *message);
-
+void		goodbye(t_data *a);
 // builtins
 
 void		echo_builtin(char **args);

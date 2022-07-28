@@ -154,6 +154,11 @@ t_list		*parse_heredoc(t_data *a, t_cmd *cmd, t_list *lst, int *check);
 void		parse_empty_quotes(t_data *a, int i);
 int			check_cmd(t_cmd *cmd);
 
+// parsing4.c
+
+void		parse_empty_quotes(t_data *a, int i);
+int			check_cmd(t_cmd *cmd);
+
 // utils.c
 
 int			ft_isspace(int c);

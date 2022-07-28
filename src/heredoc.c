@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 17:02:34 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 19:56:50 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/28 20:27:11 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,8 @@ int	handle_heredoc(char *limiter)
 	return (fd[0]);
 }
 
-t_list	*parse_heredoc(t_data *a, t_cmd *cmd, t_list *lst, int *check)
+t_list	*parse_heredoc(t_cmd *cmd, t_list *lst, int *check)
 {
-	(void)a;
 	if (!lst->next)
 	{
 		red_flag("minishell: syntax error near unexpected token 'newline'");
@@ -64,7 +63,7 @@ t_list	*parse_heredoc(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 		*check = 1;
 		return (lst);
 	}
-	if (check_file_redirection(a, lst->next->content, check))
+	if (check_file_redirection(lst->next->content, check))
 		return (lst);
 	cmd->infile = handle_heredoc(lst->next->content);
 	if (cmd->infile == -1)

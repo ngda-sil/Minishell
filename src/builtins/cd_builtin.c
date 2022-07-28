@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:30:02 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 20:06:06 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 20:46:55 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,26 @@ void	pwd_oldpwd_swap(t_env *lst)
 
 void	cd_builtin(t_data *a, char **args)
 {
+	g_status = 0;
 	if (args[1])
 	{
 		if (!chdir(args[1]))
 			pwd_oldpwd_swap(a->env);
 		else
+		{
 			red_flag(ft_strjoin4("minishell: cd : ", args[1],
 					": ", strerror(errno)));
+			g_status = 1;
+		}
 	}
 	else
 	{
 		if (!chdir(ft_getenv(a->env, "HOME")))
 			pwd_oldpwd_swap(a->env);
 		else
+		{
 			red_flag("Problem with chdir going to $HOME\n");
+			g_status = 1;
+		}
 	}
 }

@@ -6,18 +6,18 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:18:49 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 19:09:53 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/28 21:16:22 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	is_num(char *str)
+int	is_not_num(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (!ft_isdigit(str[i]) && str[i] != '=' && str[i] != '-')
+	if (!ft_isdigit(str[i]) && str[i] != '+' && str[i] != '-')
 		return (1);
 	while (str[++i])
 	{
@@ -50,9 +50,10 @@ void	exit_builtin(char **args)
 	long long		status;
 
 	if (!args[1])
-		exit (0);
-	if (is_num(args[1]) || LLONG_MAX <= ft_atoll(args[1])
-		|| LLONG_MIN >= ft_atoll(args[1]))
+		exit(0);
+	printf("Res atoll:%lld\n", ft_atoll(args[1]));
+	if (is_not_num(args[1]) || LLONG_MAX < ft_atoll(args[1])
+		|| LLONG_MIN > ft_atoll(args[1]))
 	{
 		red_flag(ft_strjoin4("exit\nminishell: exit : ", args[1], ": ",
 				"numeric argument required"));
@@ -65,4 +66,5 @@ void	exit_builtin(char **args)
 	}
 	else
 		red_flag("minishell: exit: too many arguments");
+	g_status = 1;
 }

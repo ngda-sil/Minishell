@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:07:05 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 19:59:53 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/28 20:25:15 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	tokenization(t_data *a)
 
 	lstadd_back_cmd(&a->cmd, lstnew_cmd());
 	i = 0;
-	//printf("len:%d\n", a->len);
 	while (i < a->len)
 	{
 		while (ft_isspace(a->line[i]) && !is_inside_quotes(a, i))
@@ -90,7 +89,7 @@ int	parsing(t_data *a)
 		return (1);
 	parse_dollar(a);
 	tokenization(a);
-	if (parse_redirections(a, a->cmd))
+	if (parse_redirections(a->cmd))
 		return (1);
 	tokens_to_args(a->cmd);
 	if (a->cmd->args[0] == NULL && a->cmd->next == NULL)

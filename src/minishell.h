@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 19:57:38 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/28 20:26:55 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,16 +147,16 @@ int			parse_redirection_token(t_data *a, int i);
 
 // parsing3.c
 
-int			parse_redirections(t_data *a, t_cmd *cmd);
+int			parse_redirections(t_cmd *cmd);
 t_list		*delete_redirection(t_cmd *cmd, t_list *lst);
 
-t_list		*parse_heredoc(t_data *a, t_cmd *cmd, t_list *lst, int *check);
+t_list		*parse_heredoc(t_cmd *cmd, t_list *lst, int *check);
 
 // parsing4.c
 
 void		parse_empty_quotes(t_data *a, int i);
 int			check_cmd(t_cmd *cmd);
-int			check_file_redirection(t_data *a, char *file, int *check);
+int			check_file_redirection(char *file, int *check);
 
 // utils.c
 

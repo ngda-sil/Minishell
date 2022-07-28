@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:46:17 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 20:01:38 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/28 20:26:16 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ t_list	*delete_redirection(t_cmd *cmd, t_list *lst)
 	}
 }
 
-t_list	*parse_infile(t_data *a, t_cmd *cmd, t_list *lst, int *check)
+t_list	*parse_infile(t_cmd *cmd, t_list *lst, int *check)
 {
-	(void)a;
 	char	*file;
 
 	if (!lst->next)
@@ -49,7 +48,7 @@ t_list	*parse_infile(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 		*check = 1;
 		return (lst);
 	}
-	if (check_file_redirection(a, lst->next->content, check))
+	if (check_file_redirection(lst->next->content, check))
 		return (lst);
 	file = lst->next->content;
 	cmd->infile = open(file, O_RDONLY);
@@ -63,9 +62,8 @@ t_list	*parse_infile(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 	return (delete_redirection(cmd, lst));
 }
 
-t_list	*parse_outfile_trunc(t_data *a, t_cmd *cmd, t_list *lst, int *check)
+t_list	*parse_outfile_trunc(t_cmd *cmd, t_list *lst, int *check)
 {
-	(void)a;
 	char	*file;
 
 	if (!lst->next)
@@ -75,7 +73,7 @@ t_list	*parse_outfile_trunc(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 		*check = 1;
 		return (lst);
 	}
-	if (check_file_redirection(a, lst->next->content, check))
+	if (check_file_redirection(lst->next->content, check))
 		return (lst);
 	file = lst->next->content;
 	cmd->outfile = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
@@ -84,12 +82,10 @@ t_list	*parse_outfile_trunc(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 	return (delete_redirection(cmd, lst));
 }
 
-t_list	*parse_outfile_append(t_data *a, t_cmd *cmd, t_list *lst, int *check)
+t_list	*parse_outfile_append(t_cmd *cmd, t_list *lst, int *check)
 {
-	(void)a;
 	char	*file;
 
-	(void)cmd;
 	if (!lst->next)
 	{
 		red_flag("minishell: syntax error near unexpected token 'newline'");
@@ -97,7 +93,7 @@ t_list	*parse_outfile_append(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 		*check = 1;
 		return (lst);
 	}
-	if (check_file_redirection(a, lst->next->content, check))
+	if (check_file_redirection(lst->next->content, check))
 		return (lst);
 	file = lst->next->content;
 	cmd->outfile = open(file, O_RDWR | O_CREAT | O_APPEND, 0644);
@@ -106,7 +102,7 @@ t_list	*parse_outfile_append(t_data *a, t_cmd *cmd, t_list *lst, int *check)
 	return (delete_redirection(cmd, lst));
 }
 
-int	parse_redirections(t_data *a, t_cmd *cmd)
+int	parse_redirections(t_cmd *cmd)
 {
 	t_list	*lst;
 	int		check;
@@ -118,13 +114,13 @@ int	parse_redirections(t_data *a, t_cmd *cmd)
 		while (lst)
 		{
 			if (!ft_strncmp(lst->content, ">", 2))
-				lst = parse_outfile_trunc(a, cmd, lst, &check);
+				lst = parse_outfile_trunc(cmd, lst, &check);
 			else if (!ft_strncmp(lst->content, ">>", 3))
-				lst = parse_outfile_append(a, cmd, lst, &check);
+				lst = parse_outfile_append(cmd, lst, &check);
 			else if (!ft_strncmp(lst->content, "<", 2))
-				lst = parse_infile(a, cmd, lst, &check);
+				lst = parse_infile(cmd, lst, &check);
 			else if (!ft_strncmp(lst->content, "<<", 3))
-				lst = parse_heredoc(a, cmd, lst, &check);
+				lst = parse_heredoc(cmd, lst, &check);
 			else
 				lst = lst->next;
 			if (check == 1)

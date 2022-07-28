@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 19:58:35 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 20:37:43 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,15 @@ void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
 		if (is_builtin(cmd))
 		{
 			exec_builtins(a, cmd);
-			exit(0);
+			exit(g_status);
 		}	
 		execve(cmd->path, cmd->args, env);
 		panic("minishell: execve failed");
 	}
 }
 
-void	wait_for_child(t_data *a, t_cmd *cmd)
+void	wait_for_child(t_cmd *cmd)
 {
-	(void)a;
 	int	status;
 
 	while (cmd)
@@ -79,7 +78,7 @@ void	wait_for_child(t_data *a, t_cmd *cmd)
 		if (cmd->pid > 0)
 			waitpid(cmd->pid, &status, 0);
 		if (WIFEXITED(status))
-			g_status = WIFEXITED(status);
+			g_status = WEXITSTATUS(status);
 		cmd = cmd->next;
 	}
 }
@@ -103,5 +102,5 @@ void	execution(t_data *a, t_cmd *cmd, char **env)
 		}
 	}
 	close_pipes(a->cmd);
-	wait_for_child(a, a->cmd);
+	wait_for_child(a->cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 20:05:12 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 20:00:49 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/28 20:26:43 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_cmd(t_cmd *cmd)
 	return (0);
 }
 
-int	check_file_redirection(t_data *a, char *file, int *check)
+int	check_file_redirection(char *file, int *check)
 {
 	if (!ft_strncmp(file, ">", 2))
 		red_flag("minishell: syntax error near unexpected token '>'");
@@ -50,7 +50,7 @@ int	check_file_redirection(t_data *a, char *file, int *check)
 	if (!ft_strncmp(file, ">", 2) || !ft_strncmp(file, ">>", 3)
 		|| !ft_strncmp(file, "<", 2) || !ft_strncmp(file, "<<", 3))
 	{
-		a->last_ret = 258;
+		g_status = 258;
 		*check = 1;
 		return (1);
 	}

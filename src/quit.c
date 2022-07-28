@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:21:16 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 21:27:18 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/28 21:30:21 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void	goodbye(t_data *a)
 {
 	printf("exit\n");
 	rl_clear_history();
-	tcsetattr(STDIN_FILENO, TCSAFLUSH, &a.origin);
-	free_all(&a);
+	tcsetattr(STDIN_FILENO, TCSAFLUSH, &a->origin);
+	free_all(a);
 }

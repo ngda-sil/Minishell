@@ -37,6 +37,7 @@ void	tokenization(t_data *a)
 
 	lstadd_back_cmd(&a->cmd, lstnew_cmd());
 	i = 0;
+	printf("len:%d\n", a->len);
 	while (i < a->len)
 	{
 		while (ft_isspace(a->line[i]) && !is_inside_quotes(a, i))

@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:07:05 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/27 22:07:27 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 19:07:16 by amuhleth         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,13 @@ void	tokenization(t_data *a)
 
 	lstadd_back_cmd(&a->cmd, lstnew_cmd());
 	i = 0;
+	printf("len:%d\n", a->len);
 	while (i < a->len)
 	{
 		while (ft_isspace(a->line[i]) && !is_inside_quotes(a, i))
 			i++;
+		if (i >= a->len)
+			break ;
 		if (a->line[i] == '|' && !is_inside_quotes(a, i))
 			parse_pipe(a);
 		else if ((a->line[i] == '<' || a->line[i] == '>')

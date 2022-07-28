@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/27 23:26:32 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 14:04:17 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	exec_builtins(t_data *a, t_cmd *cmd)
 
 void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
 {
-	int	status;
-
 	signal(SIGINT, &child_handler);
 	cmd->pid = fork();
 	if (cmd->pid < 0)
@@ -68,27 +66,38 @@ void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
 		execve(cmd->path, cmd->args, env);
 		panic("minishell: execve failed");
 	}
-	else if (cmd->pid > 0)
-		waitpid(cmd->pid, &status, 0);
-	if (WIFEXITED(status))
-		a->last_ret = WEXITSTATUS(status);
+}
+
+void	wait_for_child(t_data *a, t_cmd *cmd)
+{
+	int status;
+
+	while (cmd)
+	{
+		if (cmd->pid > 0)
+			waitpid(cmd->pid, &status, 0);
+		if (WIFEXITED(status))
+			a->last_ret = WIFEXITED(status);
+		cmd = cmd->next;
+	}
 }
 
 void	execution(t_data *a, t_cmd *cmd, char **env)
 {
-	int	first;
-
+	int		first;
+	
 	first = 1;
 	while (cmd)
 	{
 		set_pipe(cmd, first);
 		set_redirections(cmd);
-		if (!ft_strcmp(cmd->args[0], "exit"))
-			exit_builtin(cmd->args);
+		if (!cmd->next && is_builtin(cmd))
+			exec_builtins(a, cmd);
 		else
 			exec_cmd(a, cmd, env);
 		cmd = cmd->next;
 		first = 0;
 	}
+	wait_for_child(a, a->cmd);
 	close_pipes(a->cmd);
 }

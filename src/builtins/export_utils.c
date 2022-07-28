@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 16:16:09 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/27 23:13:12 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 13:43:24 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_arg_name(char *arg)
 	i = -1;
 	while (arg[++i])
 	{
-		if (!ft_isalnum(arg[i]) && arg[i] != '=')
+		if ((!ft_isalnum(arg[i]) && arg[i] != '_') && arg[i] != '=')
 		{
 			if ((arg[i] == '+' && arg[i + 1] == '='))
 				return (0);

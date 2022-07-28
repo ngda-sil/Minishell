@@ -6,7 +6,7 @@
 #    By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/06 19:44:57 by ngda-sil          #+#    #+#              #
-#    Updated: 2022/07/27 20:08:22 by ngda-sil         ###   ########.fr        #
+#    Updated: 2022/07/28 14:41:43 by ngda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,12 @@ LFTDIR 		= ./Libft
 LIBFT		= $(LFTDIR)/libft.a
 
 # to compile on Intel Macs (x86)
-#RL_DIR		= -I ~/.brew/Cellar/readline/8.1.2/include
-#RL_LIB   	= -lreadline -L ~/.brew/Cellar/readline/8.1.2/lib
+RL_DIR		= -I ~/.brew/Cellar/readline/8.1.2/include
+RL_LIB   	= -lreadline -L ~/.brew/Cellar/readline/8.1.2/lib
 
 # to compile on M1 Macs (arm)
-RL_DIR		= -I /opt/homebrew/Cellar/readline/8.1.2/include
-RL_LIB		= -lreadline -L/opt/homebrew/Cellar/readline/8.1.2/lib
+#RL_DIR		= -I /opt/homebrew/Cellar/readline/8.1.2/include
+#RL_LIB		= -lreadline -L/opt/homebrew/Cellar/readline/8.1.2/lib
 
 SRC_PATH 	= ./src/
 SRC 		= $(addprefix $(SRC_PATH), $(FILES))

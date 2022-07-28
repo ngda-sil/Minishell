@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 17:21:55 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/27 19:15:56 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/28 14:42:57 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	close_pipes(t_cmd *cmd)
 {
 	while (cmd)
 	{
-		if (cmd->fd[0] != 1 && cmd->fd[0] != 0)
+		if (cmd->fd[0] != 1 && cmd->fd[0] != 0 && cmd->fd[0] != 2)
 			close(cmd->fd[0]);
-		if (cmd->fd[1] != 1 && cmd->fd[1] != 0)
+		if (cmd->fd[1] != 1 && cmd->fd[1] != 0 && cmd->fd[1] != 2)
 			close(cmd->fd[1]);
 		cmd = cmd->next;
 	}

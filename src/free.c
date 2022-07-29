@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 18:24:59 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/29 16:39:00 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/29 17:48:43 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ void	free_all(t_data *a)
 	{
 		free(a->line);
 		a->line = NULL;
+	}
+	if (a->prompt)
+	{
+		free(a->prompt);
+		a->prompt = NULL;
 	}
 	if (a->buffer)
 	{

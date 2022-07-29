@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 11:09:10 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 20:39:10 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/29 13:00:16 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	echo_builtin(char **args)
 	if (args[1] && !is_only_n(args[1]))
 	{
 		n++;
-		while (!is_only_n(args[i + 1]))
+		while (args[i + 1] && !is_only_n(args[i + 1]))
 			i++;
 	}
 	while (args[++i])

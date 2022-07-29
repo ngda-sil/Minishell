@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 14:18:49 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/29 16:39:43 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/29 19:53:09 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,22 +51,21 @@ void	exit_builtin(t_data *a, char **args)
 
 	if (!args[1])
 	{
-		goodbye(a);
+		goodbye(a, 0);
 		exit(g_status);
 	}
-	printf("Res atoll:%lld\n", ft_atoll(args[1]));
 	if (is_not_num(args[1]) || LLONG_MAX < ft_atoll(args[1])
 		|| LLONG_MIN > ft_atoll(args[1]))
 	{
 		red_flag(ft_strjoin4("exit\nminishell: exit : ", args[1], ": ",
 				"numeric argument required"));
-		goodbye(a);
+		goodbye(a, 1);
 		exit(255);
 	}
 	if (!args[2])
 	{
 		status = ft_atoll(args[1]);
-		goodbye(a);
+		goodbye(a, 0);
 		exit(status % 256);
 	}
 	else

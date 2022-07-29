@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/29 18:09:48 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/29 19:55:55 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
 		execve(cmd->path, cmd->args, env);
 		if (!cmd->path)
 			g_status = 127;
-		else 
+		else
 			g_status = 1;
 		panic("minishell: execve failed");
 	}

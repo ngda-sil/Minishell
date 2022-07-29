@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/29 18:12:40 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/29 19:55:02 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ char		*join_2(char *s1, char *s2);
 
 void		panic(char *message);
 void		red_flag(char *message);
-void		goodbye(t_data *a);
+void		goodbye(t_data *a, int do_not_print);
 // builtins
 
 void		echo_builtin(char **args);

@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 14:25:12 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/27 19:38:40 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/29 19:41:30 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,23 @@ int	parse_dollar_token(t_data *a, int i)
 
 int	parse_redirection_token(t_data *a, int i)
 {
+	char	*tmp;
+
 	if (a->line[i] == '<' && a->line[i + 1] == '<')
 	{
-		add_token(a, ft_strdup("<<"));
+		add_token(a, "<<");
 		return (i + 1);
 	}
 	else if (a->line[i] == '>' && a->line[i + 1] == '>')
 	{
-		add_token(a, ft_strdup(">>"));
+		add_token(a, ">>");
 		return (i + 1);
 	}
 	else
-		add_token(a, join_clean(NULL, a->line[i]));
+	{
+		tmp = join_clean(NULL, a->line[i]);
+		add_token(a, tmp);
+		free(tmp);
+	}
 	return (i);
 }

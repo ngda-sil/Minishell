@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:30:02 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/29 16:55:09 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/29 20:48:53 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static char	*get_pwd(t_env *lst)
 		if (!strncmp(lst->name, "PWD", 3))
 		{
 			tmp = lst->value;
-			lst->value = ft_strdup(getcwd(NULL, 42));
+			lst->value = getcwd(NULL, 42);
 			return (tmp);
 		}
 		lst = lst->next;
@@ -41,8 +41,8 @@ void	pwd_oldpwd_swap(t_env *lst)
 		{
 			old_pwd = lst->value;
 			lst->value = ft_strdup(tmp);
-			free (tmp);
-			free (old_pwd);
+			free(tmp);
+			free(old_pwd);
 			break ;
 		}
 		lst = lst->next;

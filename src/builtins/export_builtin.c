@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 23:46:36 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 20:43:09 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/29 14:07:10 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ void	print_export(t_env **p)
 {
 	int	i;
 
-	i = -1;
-	while (p[++i])
+	i = 0;
+	while (p[i])
 	{
 		if (p[i]->value)
 			printf("declare -x %s=\"%s\"\n", p[i]->name, p[i]->value);
 		else
 			printf("declare -x %s\n", p[i]->name);
+		i++;
 	}
 }
 
@@ -58,7 +59,7 @@ void	sort_env_list(t_env *lst)
 	j = -1;
 	i = env_lstsize(lst);
 	temp_l = lst;
-	p = ft_calloc(i, sizeof(t_env *) + 1);
+	p = ft_calloc(i + 1, sizeof(t_env *));
 	while (++j < i)
 	{
 		p[j] = temp_l;

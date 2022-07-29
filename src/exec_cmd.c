@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 20:37:43 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/29 13:34:49 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ void	exec_builtins(t_data *a, t_cmd *cmd)
 
 void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
 {
-	signal(SIGINT, &child_handler);
 	tcsetattr(STDIN_FILENO, TCSANOW, &a->origin);
+	signal(SIGINT, &child_handler);
+	signal(SIGQUIT, &child_handler);
 	cmd->pid = fork();
 	if (cmd->pid < 0)
 		panic("minishell: fork failed");

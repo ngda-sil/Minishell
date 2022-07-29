@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 03:43:43 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 20:44:43 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/29 14:17:21 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	unset_builtin(t_data *a, char **args)
 	{
 		prev = a->env;
 		if (check_first_elem(prev, args[i], a))
-			break ;
+			continue ;
 		tmp = prev->next;
 		while (tmp)
 		{

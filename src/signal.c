@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 17:32:52 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 21:01:28 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/29 13:28:34 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,14 @@ void	handler(int sig)
 void	child_handler(int sig)
 {
 	(void)sig;
+	if (sig == SIGINT)
+		g_status = 130;
+	else if (sig == SIGQUIT)
+	{
+		printf("Quit: 3");
+		g_status = 131;
+	}
 	printf("\n");
-	g_status = 130;
 }
 
 void	set_flag_echoctl(t_data *a)

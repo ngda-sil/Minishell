@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/17 17:21:16 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 21:30:21 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/29 16:59:12 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	red_flag(char *message)
 void	panic(char *message)
 {
 	red_flag(message);
-	exit(EXIT_FAILURE);
+	exit(g_status);
 }
 
 void	goodbye(t_data *a)

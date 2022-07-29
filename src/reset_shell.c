@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:25 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/29 13:34:41 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/29 17:03:27 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	set_termios(t_data *a)
 {
-	tcgetattr(STDIN_FILENO, &a->origin);
-	a->term = a->origin;
 	a->term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(STDIN_FILENO, 0, &a->term);
 }
@@ -26,6 +24,8 @@ void	reset_shell(t_data *a, char **env)
 
 	if (!count)
 	{
+		tcgetattr(STDIN_FILENO, &a->origin);
+		a->term = a->origin;
 		a->env = env_into_list(env);
 		count++;
 	}

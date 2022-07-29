@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 23:46:36 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/29 14:07:10 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/29 17:06:42 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	export_builtin(t_data *a, char **args)
 {
 	int		i;
 
+	g_status = 0;
 	i = 1;
 	if (!args[i])
 		sort_env_list(a->env);
@@ -101,5 +102,4 @@ void	export_builtin(t_data *a, char **args)
 			i++;
 		}
 	}
-	g_status = 0;
 }

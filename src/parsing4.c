@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 20:05:12 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 20:26:43 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/29 17:22:33 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	check_cmd(t_cmd *cmd)
 		if (cmd->args[0] == NULL)
 		{
 			red_flag("minishell: syntax error near unexpected token 'pipe'");
+			g_status = 258;
 			return (1);
 		}
 		cmd = cmd->next;

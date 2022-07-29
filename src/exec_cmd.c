@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/29 13:34:49 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/29 17:36:48 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	exec_builtins(t_data *a, t_cmd *cmd)
 	if (!ft_strcmp(cmd->args[0], "env"))
 		env_builtin(a, cmd->args);
 	if (!ft_strcmp(cmd->args[0], "exit"))
-		exit_builtin(cmd->args);
+		exit_builtin(a, cmd->args);
 }
 
 void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
@@ -56,7 +56,10 @@ void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
 	signal(SIGQUIT, &child_handler);
 	cmd->pid = fork();
 	if (cmd->pid < 0)
+	{
+		g_status = 1;
 		panic("minishell: fork failed");
+	}
 	if (cmd->pid == 0)
 	{
 		redirect(cmd, cmd->in, cmd->out);
@@ -66,6 +69,10 @@ void	exec_cmd(t_data *a, t_cmd *cmd, char **env)
 			exit(g_status);
 		}	
 		execve(cmd->path, cmd->args, env);
+		if (!cmd->path)
+			g_status = 127;
+		else 
+			g_status = 1;
 		panic("minishell: execve failed");
 	}
 }

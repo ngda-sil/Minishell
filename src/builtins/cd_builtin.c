@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:30:02 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/28 20:46:55 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/29 16:55:09 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	pwd_oldpwd_swap(t_env *lst)
 void	cd_builtin(t_data *a, char **args)
 {
 	g_status = 0;
-	if (args[1])
+	if (args[1] && ft_strncmp(args[1], "~", 2))
 	{
 		if (!chdir(args[1]))
 			pwd_oldpwd_swap(a->env);

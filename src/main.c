@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/10 17:09:49 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/28 21:37:38 by amuhleth         ###   ########.fr       */
+/*   Updated: 2022/07/29 16:58:41 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char **av, char **env)
 		{
 			reset_shell(&a, env);
 			a.line = readline(a.prompt);
-			if (!a.line || !ft_strncmp(a.line, "exit", 5))
+			if (!a.line)
 				break ;
 			if (a.line && a.line[0] != '\0')
 			{	

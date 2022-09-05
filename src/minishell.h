@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 19:19:15 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/29 19:55:02 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/05 18:06:44 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ void		goodbye(t_data *a, int do_not_print);
 void		echo_builtin(char **args);
 void		cd_builtin(t_data *a, char **args);
 void		exit_builtin(t_data *a, char **args);
-void		pwd_builtin(t_data *a);
+void		pwd_builtin(void);
 void		env_builtin(t_data *a, char **args);
 void		export_builtin(t_data *a, char **args);
 void		unset_builtin(t_data *a, char **args);

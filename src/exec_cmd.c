@@ -6,7 +6,7 @@
 /*   By: amuhleth <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/18 17:10:52 by amuhleth          #+#    #+#             */
-/*   Updated: 2022/07/29 19:55:55 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/05 18:13:46 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	exec_builtins(t_data *a, t_cmd *cmd)
 	if (!ft_strcmp(cmd->args[0], "cd"))
 		cd_builtin(a, cmd->args);
 	if (!ft_strcmp(cmd->args[0], "pwd"))
-		pwd_builtin(a);
+		pwd_builtin();
 	if (!ft_strcmp(cmd->args[0], "export"))
 		export_builtin(a, cmd->args);
 	if (!ft_strcmp(cmd->args[0], "unset"))

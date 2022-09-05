@@ -6,7 +6,7 @@
 /*   By: ngda-sil <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/14 14:30:02 by ngda-sil          #+#    #+#             */
-/*   Updated: 2022/07/29 20:48:53 by ngda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/05 17:51:59 by ngda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*get_pwd(t_env *lst)
 
 	while (lst)
 	{
-		if (!strncmp(lst->name, "PWD", 3))
+		if (!ft_strncmp(lst->name, "PWD", 3))
 		{
 			tmp = lst->value;
 			lst->value = getcwd(NULL, 42);
